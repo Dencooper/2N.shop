@@ -1,3 +1,14 @@
+<?php
+require_once __DIR__ . '/../src/bootstrap.php';
+use CT275\Project\Product;
+use CT275\Project\Paginator;
+
+$product = new Product($PDO);
+
+$products = $product->all();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +28,7 @@
     <header>
         <div class="container d-flex">
             <div class="logo">
-                <a href="index.php">Quản Lý Danh Mục
+                <a href="index.php" style="font-size: 15px;" >Quản Lý Danh Mục
                 </a>
             </div>
             <nav>
@@ -260,102 +271,16 @@
                             </div>
                         </div>      
                         <div class="cartegory-right-content d-flex">
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp1.1.jpg" alt="">
-                                    <img src="../images/moda/sp1.2.jpg" class="img-hover" alt="">
+                            <?php foreach($products as $product): ?>
+                                <div class="cartegory-right-content-item">
+                                    <div class="images">
+                                        <img src="../<?=html_escape($product->thumb1)?>" alt="">
+                                        <img src="../<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                                    </div>
+                                    <p><?=html_escape($product->tittle)?></p>
+                                    <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01)) . "đ"?> </strong><del><?=html_escape($product->discount * $product->price * 0.01) . "đ"?></del></p>
                                 </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp2.1.jpg" alt="">
-                                    <img src="../images/moda/sp2.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp3.1.jpg" alt="">
-                                    <img src="../images/moda/sp3.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp4.1.jpg" alt="">
-                                    <img src="../images/moda/sp4.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp5.1.jpg" alt="">
-                                    <img src="../images/moda/sp5.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp6.1.jpg" alt="">
-                                    <img src="../images/moda/sp6.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp7.1.jpg" alt="">
-                                    <img src="../images/moda/sp7.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp8.1.jpg" alt="">
-                                    <img src="../images/moda/sp8.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp9.1.jpg" alt="">
-                                    <img src="../images/moda/sp9.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp10.1.jpg" alt="">
-                                    <img src="../images/moda/sp10.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp11.1.jpg" alt="">
-                                    <img src="../images/moda/sp11.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="../images/moda/sp12.1.jpg" alt="">
-                                    <img src="../images/moda/sp12.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
+                            <?php endforeach ?>
                         </div>
                     </div>
                 </div>
@@ -370,48 +295,48 @@
                 <div class="left-footer">
                     <div class="top-left">
                         <a href="">
-                            <img src="../images/footer/logo-footer.png" alt="">
+                            <img src="../images/logo.jpg" alt="" style="height: 50px; width: 50px;" >
                         </a>
-                        <a href="https://www.dmca.com/Protection/Status.aspx?ID=0cfdeac4-6e7f-4fca-941f-57a0a0962777&refurl=https://ivymoda.com/">
+                        <a href="#" class="mt-3">
                             <img src="../images/footer/footer1.png" alt="">
                         </a>
-                        <a href="http://online.gov.vn/Home/WebDetails/36596?AspxAutoDetectCookieSupport=1">
+                        <a href="#" class="mt-3">
                             <img src="../images/footer/footer2.png" alt="">
                         </a>
                     </div>
-                    <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0105777650</p>
-                    <p><strong>Địa chỉ đăng ký:</strong> Tổ dân phố Tháp, P.Đại Mỗ, Q.Nam Từ Liêm, TP.Hà Nội, Việt Nam</p>
-                    <p><strong>Số điện thoại:</strong> 0243 205 2222/ 090 589 8683</p>
-                    <p><strong>Email:</strong> cskh@ivy.com.vn</p>
+                    <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 018629064</p>
+                    <p><strong>Địa chỉ đăng ký:</strong> đường 3/2, phường Xuân Khánh, Quận Ninh Kiều, thành phô Cần Thơ</p>
+                    <p><strong>Số điện thoại:</strong> 0933 205 2222/ 090 589 9870</p>
+                    <p><strong>Email:</strong> lephuongnam958506@gmail.com</p>
                     <ul class="list-social">
                         <li>
-                            <a href="https://www.facebook.com/thoitrangivymoda/">
+                            <a href="#">
                                 <img id="fb" src="../images/footer/ic_fb.svg" alt="">
                             </a>
                         </li>
                         <li>
-                            <a href="https://ivymoda.com/">
+                            <a href="#">
                                 <img id="gg" src="../images/footer/ic_gg.svg" alt="">
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/ivy_moda/">
+                            <a href="#">
                                 <img id="ins" src="../images/footer/ic_instagram.svg" alt="">
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.pinterest.com/ivymoda/_saved/">
+                            <a href="#">
                                 <img id="pin" src="../images/footer/ic_pinterest.svg" alt="">
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.youtube.com/user/thoitrangivymoda">
+                            <a href="#">
                                 <img id="yt" src="../images/footer/ic_ytb.svg" alt="">
                             </a>
                         </li>   
                     </ul>
                     <div class="hotline">
-                        <a href="tel:02466623434" class="button active">Hotline: 0246 662 3434</a>
+                        <a href="tel:0286289162" class="button active">Hotline: 0286 289 162</a>
                     </div>
                 </div>
                 <div class="center-footer">
@@ -421,13 +346,13 @@
                         </div>
                         <ul>
                             <li>
-                                <a href="https://ivymoda.com/about/gioi-thieu">Về IVY moda</a>
+                                <a href="#">Về 2N Shop</a>
                             </li>
                             <li>
-                                <a target="_blank" href="https://tuyendung.ivy.com.vn">Tuyển dụng</a>
+                                <a target="_blank" href="#">Tuyển dụng</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/page/cuahang">Hệ thống cửa hàng</a>
+                                <a href="#">Hệ thống cửa hàng</a>
                             </li>
                         </ul>
                     </div>
@@ -437,31 +362,31 @@
                         </div>
                         <ul>
                             <li>
-                                <a href="https://ivymoda.com/about/chinhsach-dieukhoan">Chính sách điều khoản</a>
+                                <a href="#">Chính sách điều khoản</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/huong-dan-mua-hang">Hướng dẫn mua hàng</a>
+                                <a href="#">Hướng dẫn mua hàng</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/chinh-sach-thanh-toan">Chính sách thanh toán</a>
+                                <a href="#">Chính sách thanh toán</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/chinh-sach-doi-tra">Chính sách đổi trả</a>
+                                <a href="#">Chính sách đổi trả</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/chinh-sach-bao-hanh">Chính sách bảo hành</a>
+                                <a href="#">Chính sách bảo hành</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/chinh-sach-giao-nhan-van-chuyen">Chính sách giao nhận vận chuyển</a>
+                                <a href="#">Chính sách giao nhận vận chuyển</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/chinh-sach-the-thanh-vien">Chính sách thẻ thành viên</a>
+                                <a href="#">Chính sách thẻ thành viên</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/page/cuahang">Hệ thống cửa hàng</a>
+                                <a href="#">Hệ thống cửa hàng</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/about/qa">Q&amp;A</a>
+                                <a href="#">Q&amp;A</a>
                             </li>
                         </ul>
                     </div>
@@ -471,19 +396,19 @@
                         </div>
                         <ul>
                             <li>
-                                <a href="tel:02466623434">Hotline</a>
+                                <a href="tel:0286289162">Hotline</a>
                             </li>
                             <li>
-                                <a href="mailto:saleadmin@ivy.com.vn">Email</a>
+                                <a href="mailto:lephuongnam958506@gmail.com">Email</a>
                             </li>
                             <li>
-                                <a href="javascript:openCsChatBox();">Live Chat</a>
+                                <a href="#">Live Chat</a>
                             </li>
                             <li>
-                                <a href="http://messenger.com/t/thoitrangivymoda" target="_blank">Messenger</a>
+                                <a href="#" target="_blank">Messenger</a>
                             </li>
                             <li>
-                                <a href="https://ivymoda.com/lien-he">Liên hệ</a>
+                                <a href="#">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -491,7 +416,7 @@
                 <div class="right-footer">
                     <div class="register-form">
                         <div class="title-footer">
-                            <p class="title-footer">Nhận thông tin các chương trình của IVY moda</p>
+                            <p class="title-footer">Nhận thông tin các chương trình của 2N Shop</p>
                         </div>
                         <form id="frm_subscribe">
                             <input id="email_subscribe" type="text" name="email" placeholder="Nhập địa chỉ email" required="required">
@@ -507,10 +432,10 @@
                         </div>
                         <ul>
                             <li>
-                                <a id="app_ios" href="http://ios.ivy.vn" class="link-white" target="_blank" title="Tải App IVYmoda trên App Store"> <img src="https://pubcdn.ivymoda.com/ivy2/images/appstore.png" class="img-fluid" alt=""> </a>
+                                <a id="app_ios" href="#" class="link-white" target="_blank" title="Tải App 2N trên App Store"> <img src="https://pubcdn.ivymoda.com/ivy2/images/appstore.png" class="img-fluid" alt=""> </a>
                             </li>
                             <li>
-                                <a id="app_android" href="http://android.ivy.vn" class="link-white" target="_blank" title="Tải App IVYmoda trên Google Play"> <img src="https://pubcdn.ivymoda.com/ivy2/images/googleplay.png" class="img-fluid" alt=""> </a>
+                                <a id="app_android" href="#" class="link-white" target="_blank" title="Tải App 2N trên Google Play"> <img src="https://pubcdn.ivymoda.com/ivy2/images/googleplay.png" class="img-fluid" alt=""> </a>
                             </li>
                         </ul>
                     </div>
@@ -519,9 +444,27 @@
         </div>
     </div>
     <footer id="footer" class="site-footer">
-        <div class="coppy-right">©IVYmoda All rights reserved</div>
+        <div class="coppy-right">©All rights reserved</div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/cartegory.js"></script>
+    <script>
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        var numbers =document.querySelectorAll(".formatted-number");
+        var formattedNumber;
+        numbers.forEach(number => {
+            formattedNumber = formatNumber(number.innerHTML);
+            number.innerHTML = formattedNumber;
+        });
+        function confirmDelete() {
+            if (confirm("Bạn có muốn xóa không?")) {
+                alert("Đã xóa!");
+            } else {
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>

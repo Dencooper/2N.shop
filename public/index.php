@@ -21,7 +21,7 @@ include_once __DIR__ . '/../src/partials/header.php';
 <body>
     <?php include_once __DIR__ . '/../src/partials/navbar.php' ?>
     <!-- Main Page Content -->
-    <div class="container">
+    <div class="container pb-3 mb-3">
         <?php
             $subtitle = 'Quản lý thông tin tất cả sản phẩm';
         include_once __DIR__ . '/../src/partials/heading.php';
@@ -42,7 +42,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                             <th scope="col">Giá Niêm Yết</th>
                             <th scope="col">Giảm Giá</th>
                             <th scope="col">Ngày Tạo</th>
-                            <th scope="col">Hình Ảnh</th>
+                            <th scope="col">Hình Ảnh 1</th>
+                            <th scope="col">Hình Ảnh 2</th>
                             <th scope="col">Hành Động</th>
                         </tr>
                     </thead>
@@ -50,17 +51,18 @@ include_once __DIR__ . '/../src/partials/header.php';
                         <?php foreach($products as $product): ?>
                             <tr>
                                 <td><?=html_escape($product->tittle)?></td>
-                                <td class="text-center" id="formatted-number"><?= html_escape($product->price);?></td>
+                                <td class="text-center formatted-number"><?= html_escape($product->price);?></td>
                                 <td class="text-center"><?=html_escape($product->discount) . "%" ?></td>
                                 <td class="text-center"><?=html_escape(date("d-m-Y", strtotime($product->created_at)))?></td>
-                                <td class="text-center"><img src="../<?=html_escape($product->thumb)?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
+                                <td class="text-center"><img src="../<?=html_escape($product->thumb1)?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
+                                <td class="text-center"><img src="../<?=html_escape($product->thumb2)?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
                                 <td class="text-center" style="border-bottom: none">
                                     <a href="<?= '/edit.php?id=' . $product->getId() ?>" class="btn btn-xs btn-warning mt-3">
                                         <i alt="Edit" class="fa fa-pencil"></i> Edit
                                     </a>
                                     <form class="form mt-3" action="/delete.php" method="POST">
-                                        <input type="hidden" name="id" value="<?= $product->getId() ?>">
-                                        <button type="submit" class="btn btn-xs btn-danger"             name="delete-product">
+                                        <input type="hidden" name="id" value="<?= $product->getId() ?>"/>
+                                        <button type="submit" class="btn btn-xs btn-danger"             name="delete-product" onclick="confirmDelete()">
                                             <i alt="Delete" class="fa fa-trash"></i> Delete
                                         </button>
                                     </form>
@@ -137,10 +139,19 @@ include_once __DIR__ . '/../src/partials/header.php';
         function formatNumber(number) {
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
-
-        var number = document.getElementById('formatted-number').innerHTML;
-        var formattedNumber = formatNumber(number);
-        document.getElementById('formatted-number').innerHTML = formattedNumber;
+        var numbers =document.querySelectorAll(".formatted-number");
+        var formattedNumber;
+        numbers.forEach(number => {
+            formattedNumber = formatNumber(number.innerHTML);
+            number.innerHTML = formattedNumber;
+        });
+        function confirmDelete() {
+            if (confirm("Bạn có muốn xóa không?")) {
+                alert("Đã xóa!");
+            } else {
+                return false;
+            }
+        }
     </script>
 </body>
 

@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light">
+<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light container mt-3 mb-3">
     <!-- Branding Image -->
-    <a class="navbar-brand" href="view.php">
-        2N Shop
-    </a>
-
+    <div class="logo">
+        <a href="view.php">
+            <img src="images/logo.jpg" alt="">
+        </a>
+    </div>
     <!-- Collapsed Hamburger -->
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#app-navbar-collapse">
         <span class="navbar-toggler-icon"></span>

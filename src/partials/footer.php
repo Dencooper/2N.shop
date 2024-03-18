@@ -1,5 +1,5 @@
 <footer class="footer">
-    <div class="container text-center">
+    <div class="text-center">
         <p class="text-muted">Copyright &copy; 2024 Web Development Course</p>
     </div>
 </footer>

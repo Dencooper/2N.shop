@@ -5,7 +5,8 @@ $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product = new Product($PDO);
     $product->fill($_POST);
-    $product->fillThumb($_FILES); 
+    $product->fillThumb1($_FILES);
+    $product->fillThumb2($_FILES); 
     if ($product->validate()) {
         $product->save() && redirect('/');
     }
@@ -25,12 +26,12 @@ include_once __DIR__ . '/../src/partials/header.php';
         include_once __DIR__ . '/../src/partials/heading.php';
         ?>
 
-        <div class="row" style="height: 80vh">
+        <div class="row">
             <div class="col-12">
 
                 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
 
-                    <!-- Name -->
+                    <!-- Tittle -->
                     <div class="form-group">
                         <label for="tittle">Tên Sản Phẩm</label>
                         <input type="text" name="tittle" class="form-control<?= isset($errors['tittle']) ? ' is-invalid' : '' ?>" maxlen="255" id="tittle" placeholder="Nhập tên sản phẩm" value="<?= isset($_POST['tittle']) ? html_escape($_POST['tittle']) : '' ?>" />
@@ -65,17 +66,29 @@ include_once __DIR__ . '/../src/partials/header.php';
                         <?php endif ?>
                     </div>
 
-                    <!-- Thumb -->
+                    <!-- Thumb1 -->
                     <div class="form-group">
-                        <p >Hình Ảnh Sản Phẩm</p>
-                        <input type="file" name="thumb" id="thumb" class="<?= isset($errors['thumb']) ? ' is-invalid' : '' ?>"><?= isset($_POST['thumb']) ? html_escape($_POST['thumb']) : '' ?></input>
+                        <p >Hình Ảnh 1 của Sản Phẩm</p>
+                        <input type="file" name="thumb1" id="thumb1" class="<?= isset($errors['thumb1']) ? ' is-invalid' : '' ?>"><?= isset($_POST['thumb1']) ? html_escape($_POST['thumb1']) : '' ?></input>
 
-                        <?php if (isset($errors['thumb'])) : ?>
+                        <?php if (isset($errors['thumb1'])) : ?>
                             <span class="invalid-feedback">
-                                <strong><?= $errors['thumb'] ?></strong>
+                                <strong><?= $errors['thumb1'] ?></strong>
                             </span>
                         <?php endif ?>
-                        <img id="preview-image" src="#" alt="Preview Image" style="display: none; max-width: 250px; max-height: 250px;">
+                        <img id="preview-image1" src="#" alt="Preview Image" style="display: none; max-width: 250px; max-height: 250px;">
+                    </div>
+                    <!-- Thumb2 -->
+                    <div class="form-group">
+                        <p >Hình Ảnh 2 của Sản Phẩm</p>
+                        <input type="file" name="thumb2" id="thumb2" class="<?= isset($errors['thumb2']) ? ' is-invalid' : '' ?>"><?= isset($_POST['thumb2']) ? html_escape($_POST['thumb2']) : '' ?></input>
+
+                        <?php if (isset($errors['thumb2'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['thumb2'] ?></strong>
+                            </span>
+                        <?php endif ?>
+                        <img id="preview-image2" src="#" alt="Preview Image" style="display: none; max-width: 250px; max-height: 250px;">
                     </div>
                     <!-- Submit -->
                     <button type="submit" name="submit" class="btn btn-primary">Add product</button>
@@ -92,13 +105,27 @@ include_once __DIR__ . '/../src/partials/header.php';
             function isImage(file) {
 				return file?.type.startsWith('image/');
 			}
-			$('#thumb').change(function (event) {
+			$('#thumb1').change(function (event) {
 				if(isImage(event.target.files[0])){
 					var file = this.files[0];
                     if (file) {
                         var reader = new FileReader();
                         reader.onload = function(e) {
-                            $('#preview-image').attr('src', e.target.result).show();
+                            $('#preview-image1').attr('src', e.target.result).show();
+                        }
+                        reader.readAsDataURL(file);
+                    }
+				} else{
+					alert("Đây không phải hình ảnh!!!")
+				}
+			});
+            $('#thumb2').change(function (event) {
+				if(isImage(event.target.files[0])){
+					var file = this.files[0];
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('#preview-image2').attr('src', e.target.result).show();
                         }
                         reader.readAsDataURL(file);
                     }

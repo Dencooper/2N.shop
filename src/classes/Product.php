@@ -12,7 +12,8 @@ class Product
     public $tittle;
     public $price;
     public $discount;
-    public $thumb;
+    public $thumb1;
+    public $thumb2;
     public $created_at;
     public $updated_at;
     private array $errors = [];
@@ -34,10 +35,17 @@ class Product
         $this->discount = $data['discount'] ?? '';
         return $this;
     }
-    public function fillThumb(array $data): Product
+    public function fillThumb1(array $data): Product
     {
         $targetDir = "images/";
-        $this->thumb = $targetDir . $data['thumb']["name"] ?? '';
+        $this->thumb1 = $targetDir . $data['thumb1']["name"] ?? '';
+        return $this;
+    }
+
+    public function fillThumb2(array $data): Product
+    {
+        $targetDir = "images/";
+        $this->thumb2 = $targetDir . $data['thumb2']["name"] ?? '';
         return $this;
     }
 
@@ -77,7 +85,8 @@ class Product
             'tittle' => $this->tittle,
             'price' => $this->price,
             'discount' => $this->discount,
-            'thumb' => $this->thumb,
+            'thumb1' => $this->thumb1,
+            'thumb2' => $this->thumb2,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ] = $row;
@@ -112,25 +121,27 @@ class Product
         if ($this->id >= 0) {
             $statement = $this->db->prepare(
             'update products set tittle = :tittle, 
-            price = :price, discount = :discount, thumb = :thumb,
+            price = :price, discount = :discount, thumb1 = :thumb1, thumb2 = :thumb2
             updated_at = now() where id = :id'
             );
             $result = $statement->execute([
                 'tittle' => $this->tittle,
                 'price' => $this->price,
                 'discount' => $this->discount,
-                'thumb' => $this->thumb,
+                'thumb1' => $this->thumb1,
+                'thumb2' => $this->thumb2,
                 'id' => $this->id]);
         } else {
             $statement = $this->db->prepare(
-                'insert into products (tittle, price, discount, thumb, created_at, updated_at)
-                values (:tittle, :price, :discount, :thumb, now(), now())'
+                'insert into products (tittle, price, discount, thumb1, thumb2, created_at, updated_at)
+                values (:tittle, :price, :discount, :thumb1, :thumb2, now(), now())'
             );
             $result = $statement->execute([
                 'tittle' => $this->tittle,
                 'price' => $this->price,
                 'discount' => $this->discount,
-                'thumb' => $this->thumb
+                'thumb1' => $this->thumb1,
+                'thumb2' => $this->thumb2
             ]);
             if ($result) {
                 $this->id = $this->db->lastInsertId();
@@ -150,10 +161,11 @@ class Product
 
         return null;
     }
-    public function update(array $data, array $file): bool
+    public function update(array $data, array $file1, array $file2): bool
     {
         $this->fill($data);
-        $this->fillthumb($file);
+        $this->fillthumb1($file1);
+        $this->fillthumb2($file2);
         if ($this->validate()) {
             return $this->save();
         }

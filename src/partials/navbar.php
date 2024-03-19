@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light container mt-3 mb-3">
     <!-- Branding Image -->
     <div class="logo">
-        <a href="view.php">
+        <a href="frontend/view.php">
             <img src="images/logo.jpg" alt="">
         </a>
     </div>

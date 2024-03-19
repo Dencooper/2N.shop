@@ -31,7 +31,7 @@ include_once __DIR__ . '/../src/partials/header.php';
             <div class="col-12">
 
                 <a href="/add.php" class="btn btn-primary mb-3">
-                    <i class="fa fa-plus"></i> Thêm Sản Phẩm
+                    <i class="fa fa-plus"></i> Thêm sản phẩm
                 </a>
 
                 <!-- Table Starts Here -->

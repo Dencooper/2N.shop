@@ -62,7 +62,7 @@ include_once __DIR__ . '/../src/partials/header.php';
                                     </a>
                                     <form class="form mt-3" action="/delete.php" method="POST">
                                         <input type="hidden" name="id" value="<?= $product->getId() ?>"/>
-                                        <button type="submit" class="btn btn-xs btn-danger"             name="delete-product" onclick="confirmDelete()">
+                                        <button type="submit" class="btn btn-xs btn-danger"             name="delete-product">
                                             <i alt="Delete" class="fa fa-trash"></i> Delete
                                         </button>
                                     </form>
@@ -101,15 +101,15 @@ include_once __DIR__ . '/../src/partials/header.php';
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Confirmation</h4>
+                    <h4 class="modal-title">Xác nhận</h4>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">Do you want to delete this contact?</div>
+                <div class="modal-body">Bạn có muốn xóa sản phẩm này</div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Xóa</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy</button>
                 </div>
             </div>
         </div>
@@ -118,13 +118,13 @@ include_once __DIR__ . '/../src/partials/header.php';
     <?php include_once __DIR__ . '/../src/partials/footer.php' ?>
     <script>
         $(document).ready(function(){
-            $('button[name="delete-contact"]').on('click', function(e){
+            $('button[name="delete-product"]').on('click', function(e){
                 e.preventDefault();
                 
                 const form = $(this).closest('form');
                 const nameTd = $(this).closest('tr').find('td:first');
                 if (nameTd.length > 0) {
-                    $('.modal-body').html(`Do you want to delete "${nameTd.text()}"?`);
+                    $('.modal-body').html(`Bạn muốn xóa sản phẩm "${nameTd.text()}"?`);
                 }
                 $('#delete-confirm').modal({
                     backdrop: 'static', keyboard: false
@@ -145,13 +145,6 @@ include_once __DIR__ . '/../src/partials/header.php';
             formattedNumber = formatNumber(number.innerHTML);
             number.innerHTML = formattedNumber;
         });
-        function confirmDelete() {
-            if (confirm("Bạn có muốn xóa không?")) {
-                alert("Đã xóa!");
-            } else {
-                return false;
-            }
-        }
     </script>
 </body>
 

@@ -121,7 +121,7 @@ class Product
         if ($this->id >= 0) {
             $statement = $this->db->prepare(
             'update products set tittle = :tittle, 
-            price = :price, discount = :discount, thumb1 = :thumb1, thumb2 = :thumb2
+            price = :price, discount = :discount, thumb1 = :thumb1, thumb2 = :thumb2,
             updated_at = now() where id = :id'
             );
             $result = $statement->execute([
@@ -161,11 +161,11 @@ class Product
 
         return null;
     }
-    public function update(array $data, array $file1, array $file2): bool
+    public function update(array $data, array $file): bool
     {
         $this->fill($data);
-        $this->fillthumb1($file1);
-        $this->fillthumb2($file2);
+        $this->fillthumb1($file);
+        $this->fillThumb2($file);
         if ($this->validate()) {
             return $this->save();
         }

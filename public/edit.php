@@ -75,16 +75,27 @@ include_once __DIR__ . '/../src/partials/header.php';
                         <?php endif ?>
                     </div>
 
-                    <!-- Thumbnail -->
+                    <!-- Thumbnail 1 -->
                     <div class="form-group">
-                        <p >Hình Ảnh Của Sản Phẩm: <?= html_escape($product->thumb) ?></p>
-                        <input type="file" name="thumb" id="thumb" class="<?= isset($errors['thumb']) ? ' is-invalid' : '' ?>"></input>
-                        <?php if (isset($errors['thumb'])) : ?>
+                        <p >Hình Ảnh Của Sản Phẩm 1: <?= html_escape($product->thumb1) ?></p>
+                        <input type="file" name="thumb1" id="thumb1" class="<?= isset($errors['thumb1']) ? ' is-invalid' : '' ?>"></input>
+                        <?php if (isset($errors['thumb1'])) : ?>
                             <span class="invalid-feedback">
-                                <strong><?= $errors['thumb'] ?></strong>
+                                <strong><?= $errors['thumb1'] ?></strong>
                             </span>
                         <?php endif ?>
-                        <img id="preview-image" src="<?= html_escape($product->thumb) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
+                        <img id="preview-image" src="<?= html_escape($product->thumb1) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
+                    </div>
+                    <!-- Thumbnail 2 -->
+                    <div class="form-group">
+                        <p >Hình Ảnh Của Sản Phẩm 1: <?= html_escape($product->thumb2) ?></p>
+                        <input type="file" name="thumb2" id="thumb2" class="<?= isset($errors['thumb2']) ? ' is-invalid' : '' ?>"></input>
+                        <?php if (isset($errors['thumb2'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['thumb2'] ?></strong>
+                            </span>
+                        <?php endif ?>
+                        <img id="preview-image" src="<?= html_escape($product->thumb2) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
                     </div>
 
                     <!-- Submit -->

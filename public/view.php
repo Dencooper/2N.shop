@@ -278,7 +278,7 @@ $products = $product->all();
                                         <img src="../<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
                                     </div>
                                     <p><?=html_escape($product->tittle)?></p>
-                                    <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01)) . "đ"?> </strong><del><?=html_escape($product->discount * $product->price * 0.01) . "đ"?></del></p>
+                                    <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01)) . "đ"?> </strong><del><?=html_escape($product->price) . "đ"?></del></p>
                                 </div>
                             <?php endforeach ?>
                         </div>

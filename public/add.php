@@ -56,7 +56,7 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <!-- Discount -->
                     <div class="form-group">
-                        <label for="discount">Giá Niêm Yết</label>
+                        <label for="discount">Giảm giá</label>
                         <input type="number" name="discount" class="form-control<?= isset($errors['discount']) ? ' is-invalid' : '' ?>" id="discount" placeholder="Nhập mức giảm giá" value="<?= isset($_POST['discount']) ? html_escape($_POST['discount']) : '' ?>" />
 
                         <?php if (isset($errors['discount'])) : ?>

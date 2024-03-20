@@ -2,12 +2,7 @@ const increase = document.querySelectorAll(".increase");
 const decrease = document.querySelectorAll(".decrease");
 var quanlityInput = document.querySelector("#quantity-input");
 var shopItem = document.getElementsByClassName("product-content-right");
-var imageSrc = document.querySelector(".bigImage").src;
-var title = document.querySelector(".title").textContent;
-var price = document.querySelector(".price").textContent;
-var dicount = document.querySelector(".discount").textContent;
 var color
-var size
 var quanlity
 
 decrease.forEach(function(decreasing, index){

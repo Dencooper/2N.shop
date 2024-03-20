@@ -22,6 +22,10 @@ class Product
     {
         return $this->id;
     }
+    public function getDb(): ?PDO
+    {
+        return $this->db;
+    }
 
     public function __construct(?PDO $pdo)
     {

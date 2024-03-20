@@ -83,5 +83,23 @@ include_once __DIR__ . '/partials/navbar.php';
 include_once __DIR__ . '/partials/footer.php';
 ?>
     <script src="../js/product.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $('.product-content-left-big-img')
+        .on('mouseover', function(){
+            $(this).children('.photo').css({'transform': 'scale(2)'});
+        })
+        .on('mouseout', function(){
+            $(this).children('.photo').css({'transform': 'scale(1)'});
+        })
+        .on('mousemove', function(e){
+            $(this).children('.photo').css({'transform-origin': ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +'%'});
+        })
+        .each(function(){
+            $(this)
+                .append('<div class="photo"></div>')
+                .children('.photo').css({'background-image': 'url('+ $(this).children('img').attr('src') + ')'});
+        })
+    </script>
 </body>
 </html>

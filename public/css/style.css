@@ -568,13 +568,14 @@ del{
     width: 50%;
 }
 .product-content-left-big-img {
-    width: 80%;
+    width: 60%;
+    height: 550px;
     position: relative;
     overflow: hidden;
 }
 .product-content-left-big-img img{
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 550px;
     object-fit: cover;
 }
 .product-content-left-big-img .photo{

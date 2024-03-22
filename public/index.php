@@ -2,6 +2,12 @@
 require_once __DIR__ . '/../src/bootstrap.php';
 use CT275\Project\Product;
 use CT275\Project\Paginator;
+// Nếu tài khoản admin thì được vào trang index.php else về view
+// if (isset($_SESSION['role'])&&($_SESSION['role']==1)){
+
+// }else{
+//     header('location: frontend/view.php');
+// }
 
 $product = new Product($PDO);
 

@@ -19,8 +19,9 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
-            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="logout.php">Log Out</a></li>
         </ul>
     </div>
 </nav>

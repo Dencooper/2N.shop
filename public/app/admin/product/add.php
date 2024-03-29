@@ -1,6 +1,10 @@
 <?php
-require_once __DIR__ . '/../utils/bootstrap.php';
+require_once __DIR__ . '/../../utils/bootstrap.php';
 use CT275\Project\Product;
+use CT275\Project\Category;
+
+$category = new Category($PDO);
+$categories = $category->all();
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product = new Product($PDO);
@@ -8,37 +12,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product->fillThumb1($_FILES);
     $product->fillThumb2($_FILES); 
     if ($product->validate()) {
-        $product->save() && redirect('/app/admin/index.php');
+        $product->save() && redirect('/app/admin/product/products.php');
     }
 
     $errors = $product->getValidationErrors();
 }
-include_once __DIR__ . '/partials/header.php';
+include_once __DIR__ . '/../partials/header.php';
 ?>
-
+<style>
+        .back-product-list a:nth-child(1){
+            opacity: 0.5;
+        }
+    </style>
+</head>
 <body>
-<?php include_once __DIR__ . '/partials/navbar.php'; ?>
+<?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
     <!-- Main Page Content -->
     <div class="container" style="border-bottom:none;">
+        <h2 class="text-center animate__animated animate__bounce">Quản Lí Sản Phẩm</h2>
         <?php
         $subtitle = 'Thêm sản phẩm mới';
-        include_once __DIR__ . '/partials/heading.php';
+        include_once __DIR__ . '/../partials/heading.php';
         ?>
 
         <div class="row">
             <div class="col-12">
 
                 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
-
-                    <!-- Tittle -->
+                    <!-- category_id -->
                     <div class="form-group">
-                        <label for="tittle">Tên Sản Phẩm</label>
-                        <input type="text" name="tittle" class="form-control<?= isset($errors['tittle']) ? ' is-invalid' : '' ?>" maxlen="255" id="tittle" placeholder="Nhập tên sản phẩm" value="<?= isset($_POST['tittle']) ? html_escape($_POST['tittle']) : '' ?>" />
+                        <label for="category_id">Chọn Danh Mục Sản Phẩm</label>
+                        <br>
+                        <select name="category_id" id="" class="form-control">
+                            <option value="" style="display: none;">-- Tên Danh Mục --</option>
+                            <?php foreach($categories as $category):?>
+                                <option value=<?=$category->getId()?>><?=html_escape($category->name)?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <!-- title -->
+                    <div class="form-group">
+                        <label for="title">Tên Sản Phẩm</label>
+                        <input type="text" name="title" class="form-control<?= isset($errors['title']) ? ' is-invalid' : '' ?>" maxlen="255" id="title" placeholder="Nhập tên sản phẩm" value="<?= isset($_POST['title']) ? html_escape($_POST['title']) : '' ?>" />
 
-                        <?php if (isset($errors['tittle'])) : ?>
+                        <?php if (isset($errors['title'])) : ?>
                             <span class="invalid-feedback">
-                                <strong><?= $errors['tittle'] ?></strong>
+                                <strong><?= $errors['title'] ?></strong>
                             </span>
                         <?php endif ?>
                     </div>
@@ -91,7 +111,7 @@ include_once __DIR__ . '/partials/header.php';
                         <img class="preview-image" id="preview-image2" src="#" alt="Preview Image" style="display: none; max-width: 250px; max-height: 250px;">
                     </div>
                     <!-- Submit -->
-                    <button type="submit" name="submit" class="btn btn-primary">Add product</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Xác nhận</button>
                 </form>
 
             </div>
@@ -99,7 +119,7 @@ include_once __DIR__ . '/partials/header.php';
 
     </div>
 
-    <?php include_once __DIR__ . '/partials/footer.php';?>
+    <?php include_once __DIR__ . '/../partials/footer.php';?>
     <script>
         $(document).ready(function() {
             function isImage(file) {

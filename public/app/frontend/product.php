@@ -20,7 +20,7 @@ include_once __DIR__ . '/partials/navbar.php';
                         </div>
                     </div>
                     <div class="product-content-right">
-                        <h1 class="title"><?= html_escape($detailProduct->tittle) ?></h1>
+                        <h1 class="title"><?= html_escape($detailProduct->title) ?></h1>
                         <div class="product-content-right-sub-info d-flex">
                             <p>SKU: <span>67T0224</span></p>
                             <div class="product-content-right-rating d-flex">

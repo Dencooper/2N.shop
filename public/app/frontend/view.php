@@ -126,7 +126,7 @@ include_once __DIR__ . '/partials/navbar.php';
                                         <img src="../<?=html_escape($product->thumb1)?>" alt="">
                                         <img src="../<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
                                     </div>
-                                    <p><?=html_escape($product->tittle)?></p>
+                                    <p><?=html_escape($product->title)?></p>
                                     <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01))?>đ </strong><del><?=html_escape($product->price)?>đ</del></p>
                                     <div class="add-to-cart">
                                         

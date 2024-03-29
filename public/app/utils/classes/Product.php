@@ -9,11 +9,12 @@ class Product
     private ?PDO $db;
 
     private int $id = -1;
-    public $tittle;
+    public $title;
     public $price;
     public $discount;
     public $thumb1;
     public $thumb2;
+    public $category_id;
     public $created_at;
     public $updated_at;
     private array $errors = [];
@@ -34,7 +35,8 @@ class Product
 
     public function fill(array $data): Product
     {
-        $this->tittle = $data['tittle'] ?? '';
+        $this->category_id = $data['category_id'] ?? '';
+        $this->title = $data['title'] ?? '';
         $this->price = $data['price'] ?? '';
         $this->discount = $data['discount'] ?? '';
         return $this;
@@ -61,9 +63,9 @@ class Product
 
     public function validate(): bool
     {
-        $tittle = trim($this->tittle);
-        if (!$tittle) {
-            $this->errors['tittle'] = 'Invalid tittle.';
+        $title = trim($this->title);
+        if (!$title) {
+            $this->errors['title'] = 'Invalid title.';
         }
 
         return empty($this->errors);
@@ -86,11 +88,12 @@ class Product
     {
         [
             'id' => $this->id,
-            'tittle' => $this->tittle,
+            'title' => $this->title,
             'price' => $this->price,
             'discount' => $this->discount,
             'thumb1' => $this->thumb1,
             'thumb2' => $this->thumb2,
+            'category_id' => $this->category_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ] = $row;
@@ -124,12 +127,12 @@ class Product
         $result = false;
         if ($this->id >= 0) {
             $statement = $this->db->prepare(
-            'update products set tittle = :tittle, 
-            price = :price, discount = :discount, thumb1 = :thumb1, thumb2 = :thumb2,
-            updated_at = now() where id = :id'
+            'update products set category_id = :category_id, title = :title, 
+            price = :price, discount = :discount, thumb1 = :thumb1, thumb2 = :thumb2, updated_at = now() where id = :id'
             );
             $result = $statement->execute([
-                'tittle' => $this->tittle,
+                'category_id' => $this->category_id,
+                'title' => $this->title,
                 'price' => $this->price,
                 'discount' => $this->discount,
                 'thumb1' => $this->thumb1,
@@ -137,15 +140,16 @@ class Product
                 'id' => $this->id]);
         } else {
             $statement = $this->db->prepare(
-                'insert into products (tittle, price, discount, thumb1, thumb2, created_at, updated_at)
-                values (:tittle, :price, :discount, :thumb1, :thumb2, now(), now())'
+                'insert into products (title, price, discount, thumb1, thumb2, created_at, updated_at, category_id)
+                values (:title, :price, :discount, :thumb1, :thumb2, now(), now(), :category_id)'
             );
             $result = $statement->execute([
-                'tittle' => $this->tittle,
+                'title' => $this->title,
                 'price' => $this->price,
                 'discount' => $this->discount,
                 'thumb1' => $this->thumb1,
-                'thumb2' => $this->thumb2
+                'thumb2' => $this->thumb2,
+                'category_id' => $this->category_id
             ]);
             if ($result) {
                 $this->id = $this->db->lastInsertId();

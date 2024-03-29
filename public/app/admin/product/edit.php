@@ -1,35 +1,46 @@
 <?php
-require_once __DIR__ . '/../utils/bootstrap.php';
+require_once __DIR__ . '/../../utils/bootstrap.php';
 use CT275\Project\Product;
+use CT275\Project\Category;
 
 $product = new Product($PDO);
+$category = new Category($PDO);
 
+$categories = $category->all();
 $id = isset($_REQUEST['id']) ? filter_var($_REQUEST['id'], FILTER_SANITIZE_NUMBER_INT) : -1;
+$category = $category->find($product->find($id)->category_id);
+
+
 if ($id < 0 || !($product->find($id))) {
-    redirect('/app/admin/index.php');
+    redirect('/app/admin/product/products.php');
 }
 
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($product->update($_POST, $_FILES)) {
-        redirect('/app/admin/index.php');
+        redirect('/app/admin/product/products.php');
     }
     $errors = $product->getValidationErrors();
 }
 
-include_once __DIR__ . '/partials/header.php';
+include_once __DIR__ . '/../partials/header.php';
 ?>
-
+<style>
+       .back-product-list a:nth-child(1){
+            opacity: 0.5;
+        }
+    </style>
+</head>
 <body>
-<?php include_once __DIR__ . '/partials/navbar.php'; ?>
+<?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
 
     <!-- Main Page Content -->
     <div class="container" style="border-bottom:none;" >
-
+        <h2 class="text-center animate__animated animate__bounce">Quản Lí Sản Phẩm</h2>
         <?php
         $subtitle = 'Cập nhật thông tin sản phẩm';
-        include_once __DIR__ . '/partials/heading.php';
+        include_once __DIR__ . '/../partials/heading.php';
         ?>
 
         <div class="row">
@@ -39,14 +50,26 @@ include_once __DIR__ . '/partials/header.php';
 
                     <input type="hidden" name="id" value="<?= $product->getId() ?>">
 
-                    <!-- Tittle -->
+                    <!-- category_id -->
                     <div class="form-group">
-                        <label for="tittle">Tên Sản Phẩm</label>
-                        <input type="text" name="tittle" class="form-control<?= isset($errors['tittle']) ? ' is-invalid' : '' ?>" maxlen="255" id="tittle" placeholder="Nhập tên sản phẩm" value="<?= html_escape($product->tittle) ?>" />
+                        <label for="category_id">Chọn Danh Mục Sản Phẩm</label>
+                        <br>
+                        <select name="category_id" id="" class="form-control">
+                            <option value=<?=html_escape($category->getId())?> style="display: none;"><?=html_escape($category->name)?></option>
+                            <?php foreach($categories as $category):?>
+                                <option value=<?=html_escape($category->getId())?>><?=html_escape($category->name)?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
 
-                        <?php if (isset($errors['tittle'])) : ?>
+                    <!-- title -->
+                    <div class="form-group">
+                        <label for="title">Tên Sản Phẩm</label>
+                        <input type="text" name="title" class="form-control<?= isset($errors['title']) ? ' is-invalid' : '' ?>" maxlen="255" id="title" placeholder="Nhập tên sản phẩm" value="<?= html_escape($product->title) ?>" />
+
+                        <?php if (isset($errors['title'])) : ?>
                             <span class="invalid-feedback">
-                                <strong><?= $errors['tittle'] ?></strong>
+                                <strong><?= $errors['title'] ?></strong>
                             </span>
                         <?php endif ?>
                     </div>
@@ -83,7 +106,7 @@ include_once __DIR__ . '/partials/header.php';
                                 <strong><?= $errors['thumb1'] ?></strong>
                             </span>
                         <?php endif ?>
-                        <img class="preview-image" id="preview-image1" src="../<?= html_escape($product->thumb1) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
+                        <img class="preview-image" id="preview-image1" src="../../<?= html_escape($product->thumb1) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
                     </div>
                     <!-- Thumbnail 2 -->
                     <div class="form-group" style="margin-top:40px" >
@@ -94,11 +117,11 @@ include_once __DIR__ . '/partials/header.php';
                                 <strong><?= $errors['thumb2'] ?></strong>
                             </span>
                         <?php endif ?>
-                        <img class="preview-image" id="preview-image2" src="../<?= html_escape($product->thumb2) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
+                        <img class="preview-image" id="preview-image2" src="../../<?= html_escape($product->thumb2) ?>" alt="Preview Image" style=" max-width: 250px; max-height: 250px;">
                     </div>
 
                     <!-- Submit -->
-                    <button type="submit" name="submit" class="btn btn-primary">Update product</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Xác nhận</button>
                 </form>
 
             </div>
@@ -106,7 +129,7 @@ include_once __DIR__ . '/partials/header.php';
 
     </div>
 
-    <?php include_once __DIR__ . '/partials/footer.php' ?>
+    <?php include_once __DIR__ . '/../partials/footer.php' ?>
     <script>
         $(document).ready(function() {
             function isImage(file) {

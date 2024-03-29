@@ -91,6 +91,7 @@ input:focus{
     text-align: center;
     transition: 0.2s;
 }
+
 .button a{
     color: white;
 }
@@ -1634,4 +1635,13 @@ thead{
 }
 .preview-image{
     margin-left: 60px;
+}
+
+.back-product-list a {
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.back-product-list a:hover {
+    color: #000;
 }

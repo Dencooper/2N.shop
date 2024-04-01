@@ -1,13 +1,23 @@
 <?php
+require_once __DIR__ . '/../utils/bootstrap.php';
+use CT275\Project\Product;
+
+$product = new Product($PDO);
+
+$products = $product->all();
+
 include_once __DIR__ . '/partials/header.php';
 ?>
-    <title>Danh Mục Sản Phẩm - Client</title>
+    <title>Danh Mục - Nam | 2N Shop</title>
 <?php
 include_once __DIR__ . '/partials/navbar.php';
 ?>
     <main class="site-main">
         <div class="container">
             <section class="cartegory">
+                <div class="cartegory-top d-flex">
+                    <a href="../../home.php">Trang chủ </a><span>&#8212;</span><p>Nam</p>
+                </div>
                 <div class="d-flex">
                     <div class="cartegory-left">
                         <ul>
@@ -120,19 +130,20 @@ include_once __DIR__ . '/partials/navbar.php';
                             </div>
                         </div>      
                         <div class="cartegory-right-content d-flex">
-                            <?php foreach($products as $product): ?>
-                                <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
-                                    <div class="images">
-                                        <img src="../<?=html_escape($product->thumb1)?>" alt="">
-                                        <img src="../<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                            <?php foreach($products as $product): 
+                                if ($product->category_id == 6): ?>
+                                    <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
+                                        <div class="images">
+                                            <img src="../<?=html_escape($product->thumb1)?>" alt="">
+                                            <img src="../<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                                        </div>
+                                        <p style="height:45px;"><?=html_escape($product->title)?></p>
+                                        <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01))?>đ </strong><del><?=html_escape($product->price)?>đ</del></p>
+                                        <div class="add-to-cart">
+                                            
+                                        </div>
                                     </div>
-                                    <p><?=html_escape($product->title)?></p>
-                                    <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01))?>đ </strong><del><?=html_escape($product->price)?>đ</del></p>
-                                    <div class="add-to-cart">
-                                        
-                                    </div>
-                                </div>
-                            <?php endforeach ?>
+                            <?php endif; endforeach ?>
                         </div>
                     </div>
                 </div>

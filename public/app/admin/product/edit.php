@@ -87,7 +87,7 @@ include_once __DIR__ . '/../partials/header.php';
                     </div>
                     <!-- Discount -->
                     <div class="form-group">
-                        <label for="discount">Mức Giảm Giá</label>
+                        <label for="discount">Mức giảm giá (%)</label>
                         <input type="number" name="discount" class="form-control<?= isset($errors['discount']) ? ' is-invalid' : '' ?>" id="discount" placeholder="Nhập mức giảm giá" value="<?= html_escape($product->discount) ?>" />
 
                         <?php if (isset($errors['discount'])) : ?>
@@ -96,10 +96,12 @@ include_once __DIR__ . '/../partials/header.php';
                             </span>
                         <?php endif ?>
                     </div>
-
+                    
                     <!-- Thumbnail 1 -->
-                    <div class="form-group" style="margin-top:30px" >
-                        <p style="font-size:14px;" >Hình Ảnh Của Sản Phẩm 1: <?= html_escape($product->thumb1) ?></p>
+                    <div class="form-group" style="margin-top:10px;" >
+                        <p style="font-size:14px;" >Nếu không thay đổi hình ảnh của sản phẩm</p>
+                        <p style="font-size:14px;">Vui lòng chọn lại hình ảnh theo đường dẫn</p>
+                        <p style="font-size:14px; margin-top:20px;">Hình Ảnh Của Sản Phẩm 1: <?= html_escape($product->thumb1) ?></p>
                         <input type="file" name="thumb1" id="thumb1" class="<?= isset($errors['thumb1']) ? ' is-invalid' : '' ?>"></input>
                         <?php if (isset($errors['thumb1'])) : ?>
                             <span class="invalid-feedback">
@@ -130,6 +132,8 @@ include_once __DIR__ . '/../partials/header.php';
     </div>
 
     <?php include_once __DIR__ . '/../partials/footer.php' ?>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
     <script>
         $(document).ready(function() {
             function isImage(file) {

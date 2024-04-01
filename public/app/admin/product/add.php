@@ -39,13 +39,13 @@ include_once __DIR__ . '/../partials/header.php';
         <div class="row">
             <div class="col-12">
 
-                <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+                <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data" id="addProductForm" >
                     <!-- category_id -->
                     <div class="form-group">
                         <label for="category_id">Chọn Danh Mục Sản Phẩm</label>
                         <br>
-                        <select name="category_id" id="" class="form-control">
-                            <option value="" style="display: none;">-- Tên Danh Mục --</option>
+                        <select name="category_id" class="form-control">
+                            <option style="display: none;">-- Tên Danh Mục --</option>
                             <?php foreach($categories as $category):?>
                                 <option value=<?=$category->getId()?>><?=html_escape($category->name)?></option>
                             <?php endforeach ?>
@@ -54,7 +54,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- title -->
                     <div class="form-group">
                         <label for="title">Tên Sản Phẩm</label>
-                        <input type="text" name="title" class="form-control<?= isset($errors['title']) ? ' is-invalid' : '' ?>" maxlen="255" id="title" placeholder="Nhập tên sản phẩm" value="<?= isset($_POST['title']) ? html_escape($_POST['title']) : '' ?>" />
+                        <input type="text" name="title" class="form-control" maxlen="255" id="title" placeholder="Nhập tên sản phẩm"  />
 
                         <?php if (isset($errors['title'])) : ?>
                             <span class="invalid-feedback">
@@ -66,36 +66,21 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- Price -->
                     <div class="form-group">
                         <label for="price">Giá Niêm Yết</label>
-                        <input type="number" name="price" class="form-control<?= isset($errors['price']) ? ' is-invalid' : '' ?>" id="price" placeholder="Nhập giá niêm yết" value="<?= isset($_POST['price']) ? html_escape($_POST['price']) : '' ?>" />
+                        <input type="number" name="price" class="form-control" id="price" placeholder="Nhập giá niêm yết"/>
 
-                        <?php if (isset($errors['price'])) : ?>
-                            <span class="invalid-feedback">
-                                <strong><?= $errors['price'] ?></strong>
-                            </span>
-                        <?php endif ?>
                     </div>
                     <!-- Discount -->
                     <div class="form-group">
-                        <label for="discount">Giảm giá</label>
-                        <input type="number" name="discount" class="form-control<?= isset($errors['discount']) ? ' is-invalid' : '' ?>" id="discount" placeholder="Nhập mức giảm giá" value="<?= isset($_POST['discount']) ? html_escape($_POST['discount']) : '' ?>" />
+                        <label for="discount">Mức giảm giá (%)</label>
+                        <input type="number" name="discount" class="form-control" id="discount" placeholder="Nhập mức giảm giá" value="<?= isset($_POST['discount']) ? html_escape($_POST['discount']) : '' ?>" />
 
-                        <?php if (isset($errors['discount'])) : ?>
-                            <span class="invalid-feedback">
-                                <strong><?= $errors['discount'] ?></strong>
-                            </span>
-                        <?php endif ?>
                     </div>
 
                     <!-- Thumb1 -->
                     <div class="form-group" style="margin-top:30px">
                         <p style="font-size:14px;">Hình Ảnh 1 của Sản Phẩm</p>
-                        <input type="file" name="thumb1" id="thumb1" class="<?= isset($errors['thumb1']) ? ' is-invalid' : '' ?>"><?= isset($_POST['thumb1']) ? html_escape($_POST['thumb1']) : '' ?></input>
+                        <input type="file" name="thumb1" id="thumb1" ><?= isset($_POST['thumb1']) ? html_escape($_POST['thumb1']) : '' ?></input>
 
-                        <?php if (isset($errors['thumb1'])) : ?>
-                            <span class="invalid-feedback">
-                                <strong><?= $errors['thumb1'] ?></strong>
-                            </span>
-                        <?php endif ?>
                         <img class="preview-image" id="preview-image1" src="#" alt="Preview Image" style="display: none; max-width: 250px; max-height: 250px;">
                     </div>
                     <!-- Thumb2 -->
@@ -155,6 +140,70 @@ include_once __DIR__ . '/../partials/header.php';
 			});
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#addProductForm").validate({
+                rules: {
+                    category_id: {
+                        range: [1, 99]
+                    },
+                    title: {
+                        required: true, 
+                        minlength: 4 
+                    },
+                    price: {
+                        required: true,
+                        price: true
+                    },
+                    discount: {
+                        required: true,
+                        tel: true
+                    },
+                    thumb1: {
+                        required: true,
+                    },
+                    thumb2: {
+                        required: true,
+                    },    
+                },
+                messages: {
+                    title: {
+                        required: "Bạn chưa nhập vào tên sản phẩm",
+                        minlength: "Bạn chưa nhập vào tên sản phẩm"
+                    },
+                    price: {
+                        required: "Bạn chưa nhập vào giá sản phẩm",
+                        number: true,
+                        range: [1000, 99999999]
+                    },
+                    discount: {
+                        required: "Bạn chưa nhập mức giảm giá",
+                        number: true,
+                        range: [0, 100]
+                    },
+                    category_id: "Bạn chưa chọn danh mục",
+                    thumb1: "Bạn chưa chọn ảnh 1 cho sản phẩm",
+                    thumb2: "Bạn chưa chọn ảnh 2 cho sản phẩm"
+                },
+                errorElement: "div",
+                errorPlacement: function (error, element) {
+                    error.addClass("invalid-feedback");
+                    if(element.prop("type") === "checkbox") {
+                        error.insertAfter(element.siblings("label"));
+                    }else{
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>

@@ -71,12 +71,12 @@ include_once __DIR__ . '/../partials/header.php';
                                     <td class="align-middle"><img src="../../<?=html_escape($result['thumb2'])?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
                                     <td class="align-middle" style="border-bottom: none">
                                         <a href="<?= '/edit.php?id=' . $result['id'] ?>" class="btn btn-xs btn-warning">
-                                            <i alt="Edit" class="fa fa-pencil"></i> Edit
+                                            <i alt="Edit" class="fa fa-pencil"></i> Sửa
                                         </a>
                                         <form class="form mt-3" action="/delete.php" method="POST">
                                             <input type="hidden" name="id" value="<?= $result['id'] ?>"/>
                                             <button type="submit" class="btn btn-xs btn-danger"             name="delete-product">
-                                                <i alt="Delete" class="fa fa-trash"></i> Delete
+                                                <i alt="Delete" class="fa fa-trash"></i> Xóa
                                             </button>
                                         </form>
                                     </td>
@@ -101,7 +101,7 @@ include_once __DIR__ . '/../partials/header.php';
                 <div class="modal-body">Bạn có muốn xóa sản phẩm này</div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Xóa</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-light">Hủy</button>
                 </div>
             </div>
         </div>

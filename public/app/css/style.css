@@ -9,12 +9,9 @@ html {
     margin: auto;
 }
 .container{
-    max-width: 1400px;
+    max-width: 1350px;
     border-bottom: 0.8px solid #eff0f2;
     padding: 0;
-}
-main .container{
-    padding-bottom: 30px;
 }
 ul{
     padding-left: 0;
@@ -462,10 +459,6 @@ label input{
     font-size: 14px;
     border-bottom: 1px solid #F7F8F9;
 }
-.cartegory-top p, .cartegory-top a{
-    font-size: 14px;
-}
-
 .cartegory-right-top-item{
     padding: 0 12px;
     width: 25%;
@@ -477,12 +470,13 @@ label input{
 
 }
 .cartegory-right-content-item{
-    width: 24%;
+    width: 25%;
     padding: 0 12px;
     align-items: center;
+    margin-bottom: 50px;
 }
-.cartegory-right-content-item p{
-    font-size: 14px;
+.cartegory-right-content-item p {
+    font-size: 15px;
     font-weight: unset;
     padding: 5px 0;
 }
@@ -548,32 +542,28 @@ del{
 .product-content{
     margin-top: 10px;
     margin-left: 30px;
+    margin-right: 30px;
 }
 .product-content-left{
-    width: 45%;
+    width: 50%;
+}
+.bigImage {
+    display: none;
+}
+.bigImage.active{
+    display: block;
 }
 .product-content-left-big-img {
     width: 70%;
     height: 610px;
-    position: relative;
-    overflow: hidden;
 }
 .product-content-left-big-img img{
-    object-fit: cover;
-}
-.product-content-left-big-img .photo{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    width: 450px;
+    height: 630px;
 }
 .product-content-left-small-img{
     width: 25%;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 .product-content-left-small-img img{
     width: 80%;
@@ -581,8 +571,8 @@ del{
     margin-bottom: 20px;
 }
 .product-content-right{
-    width: 55%;
-    padding-left: 80px;
+    width: 50%;
+    padding-left: 30px;
 }
 .product-content-right h1{
     font-size: 30px;
@@ -600,6 +590,7 @@ del{
 }
 .product-content-right .product-content-right-sub-info p{
    font-weight: 100;
+   font-size: 16px;
    flex: 1;
 }
 .product-content-right-sub-info .product-content-right-rating{
@@ -653,7 +644,7 @@ del{
 }
 .product-content-right-price .product-content-right-price-sale{
     position: absolute;
-    right: -30%;
+    right: -35%;
     top: -10px;
     background-color: #dc633a;
     color: #F7F8F9;

@@ -42,7 +42,7 @@ include_once __DIR__ . '/../partials/header.php';
                     </div>
                     
                     <div class="search mt-2">
-                        <form action="search.php" method="get">
+                        <form action="search.php" method="get"  >
                             <input type="text" name="name" placeholder="Nhập tên danh mục.." style="padding:2px 0 2px 5px; font-size:16px" required oninvalid="this.setCustomValidity('Hãy nhập nội dung!')" />
                             <button type="submit" style="padding: 3px 8px; margin-bottom:2px;font-size:16px"  class="btn btn-dark" ><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
@@ -69,12 +69,12 @@ include_once __DIR__ . '/../partials/header.php';
                                     <td class="align-middle"><?= html_escape($countProduct);?></td>
                                     <td class="align-middle"><?=html_escape(date("d-m-Y", strtotime($result['created_at'])))?></td>
                                     <td class="align-middle" style="border-bottom: none">
-                                        <a href="<?= '/edit.php?id=' . $result['id'] ?>" class="btn btn-xs btn-warning">
+                                        <a href="<?= 'edit.php?id=' . $result['id'] ?>" class="btn btn-xs btn-warning">
                                             <i alt="Edit" class="fa fa-pencil"></i> Edit
                                         </a>
-                                        <form class="form mt-3" action="/delete.php" method="POST">
+                                        <form class="form mt-3" action="delete.php" method="POST">
                                             <input type="hidden" name="id" value="<?= $result['id'] ?>"/>
-                                            <button type="submit" class="btn btn-xs btn-danger"             name="delete-product">
+                                            <button type="submit" class="btn btn-xs btn-danger"           name="delete-category">
                                                 <i alt="Delete" class="fa fa-trash"></i> Delete
                                             </button>
                                         </form>
@@ -127,5 +127,4 @@ include_once __DIR__ . '/../partials/header.php';
         });
     </script>
 </body>
-
 </html>

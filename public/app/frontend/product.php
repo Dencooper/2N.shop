@@ -1,28 +1,33 @@
 <?php
-include_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../utils/bootstrap.php';
+use CT275\Project\Product;
+
+$product = new Product($PDO);
 $detailProduct = $product->find($_GET['id']);
+include_once __DIR__ . '/partials/header.php';
 ?>
     <title>Chi tiết sản phẩm</title>
 <?php
 include_once __DIR__ . '/partials/navbar.php';
 ?>
-    <main>
+    <main style="padding-top:100px;" >
         <section class="product">
-            <div class="container">
+            <div class="container" style="padding-bottom: 40px" >
                 <div class="product-content d-flex">
                     <div class="product-content-left d-flex">
                         <div class="product-content-left-big-img">
-                            <img src="../<?= html_escape($detailProduct->thumb1) ?>" alt="" class="bigImage">
+                            <img src="../<?= html_escape($detailProduct->thumb1) ?>" alt="" class="bigImage active">
+                            <img src="../<?= html_escape($detailProduct->thumb2) ?>" alt="" class="bigImage">
                         </div>
                         <div class="product-content-left-small-img">
-                            <img src="../<?= html_escape($detailProduct->thumb1) ?>" alt="">
-                            <img src="../<?= html_escape($detailProduct->thumb2) ?>" alt="">
+                            <img src="../<?= html_escape($detailProduct->thumb1) ?>" alt="" class="galery" >
+                            <img src="../<?= html_escape($detailProduct->thumb2) ?>" alt="" class="galery">
                         </div>
                     </div>
                     <div class="product-content-right">
                         <h1 class="title"><?= html_escape($detailProduct->title) ?></h1>
                         <div class="product-content-right-sub-info d-flex">
-                            <p>SKU: <span>67T0224</span></p>
+                            <p>ID: <span><?= html_escape($detailProduct->getId()) ?></span></p>
                             <div class="product-content-right-rating d-flex">
                                 <div class="product-content-right-rating-wrapper">
                                     <div class="product-content-right-rating-background"></div>
@@ -32,10 +37,10 @@ include_once __DIR__ . '/partials/navbar.php';
                             </div>
                         </div>
                         <div class="product-content-right-price">
-                            <b class="price"><?= html_escape($detailProduct->price * $detailProduct->discount * 0.01) ?>đ </b>
-                            <del><?= html_escape($detailProduct->price)?>đ</del>
+                            <b class="price formatted-number"><?= html_escape($detailProduct->price - ($detailProduct->price * $detailProduct->discount * 0.01)) ?>đ </b>
+                            <del class="formatted-number" ><?= html_escape($detailProduct->price)?>đ</del>
                             <div class="product-content-right-price-sale">
-                                <span class="discount">-50%</span> 
+                                <span class="discount">-<?= html_escape($detailProduct->discount)?>%</span> 
                             </div>
                         </div>
                         <div class="product-content-right-color">
@@ -85,21 +90,15 @@ include_once __DIR__ . '/partials/footer.php';
     <script src="../js/product.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $('.product-content-left-big-img')
-        .on('mouseover', function(){
-            $(this).children('.photo').css({'transform': 'scale(2)'});
-        })
-        .on('mouseout', function(){
-            $(this).children('.photo').css({'transform': 'scale(1)'});
-        })
-        .on('mousemove', function(e){
-            $(this).children('.photo').css({'transform-origin': ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +'%'});
-        })
-        .each(function(){
-            $(this)
-                .append('<div class="photo"></div>')
-                .children('.photo').css({'background-image': 'url('+ $(this).children('img').attr('src') + ')'});
-        })
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        var numbers =document.querySelectorAll(".formatted-number");
+        var formattedNumber;
+        numbers.forEach(number => {
+            formattedNumber = formatNumber(number.innerHTML);
+            number.innerHTML = formattedNumber;
+        });
     </script>
 </body>
 </html>

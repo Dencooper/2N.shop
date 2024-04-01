@@ -4,15 +4,19 @@ namespace CT275\Project;
 
 use PDO;
 
-class Contact
+class User
 {
     private ?PDO $db;
 
     private int $id = -1;
-    public $name;
-    public $phone;
-    public $notes;
-    public $avatar;
+    public $fullname;
+    public $email;
+    public $phone_number;
+    public $address;
+    public $dob;
+    public $gender;
+    public $password;
+    public $role_id;
     public $created_at;
     public $updated_at;
     private array $errors = [];
@@ -21,23 +25,26 @@ class Contact
     {
         return $this->id;
     }
+    public function getDb(): ?PDO
+    {
+        return $this->db;
+    }
 
     public function __construct(?PDO $pdo)
     {
         $this->db = $pdo;
     }
 
-    public function fill(array $data): Contact
+    public function fill(array $data): user
     {
-        $this->name = $data['name'] ?? '';
-        $this->phone = $data['phone'] ?? '';
-        $this->notes = $data['notes'] ?? '';
-        return $this;
-    }
-    public function fillAvatar(array $data): Contact
-    {
-        $targetDir = "uploads/";
-        $this->avatar = $targetDir . $data['avatar']["name"] ?? '';
+        $this->fullname = $data['fullname'] ?? '';
+        $this->email = $data['email'] ?? '';
+        $this->phone_number = $data['phone_number'] ?? '';
+        $this->address = $data['address'] ?? '';
+        $this->dob = $data['dob'] ?? '';
+        $this->gender = $data['gender'] ?? '';
+        $this->password = md5($data['password']) ?? '';
+        $this->role_id = $data['role_id'] ?? '';
         return $this;
     }
 
@@ -49,22 +56,9 @@ class Contact
 
     public function validate(): bool
     {
-        $name = trim($this->name);
-        if (!$name) {
-            $this->errors['name'] = 'Invalid name.';
-        }
-
-        $validPhone = preg_match(
-            '/^(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b$/',
-            $this->phone
-        );
-        if (!$validPhone) {
-            $this->errors['phone'] = 'Invalid phone number.';
-        }
-
-        $notes = trim($this->notes);
-        if (strlen($notes) > 255) {
-            $this->errors['notes'] = 'Notes must be at most 255 characters.';
+        $fullname = trim($this->fullname);
+        if (!$fullname) {
+            $this->errors['fullname'] = 'Invalid fullname.';
         }
 
         return empty($this->errors);
@@ -72,25 +66,29 @@ class Contact
 
     public function all(): array
     {
-        $contacts = [];
-        $statement = $this->db->prepare('select * from contacts');
+        $users = [];
+        $statement = $this->db->prepare('select * from users');
         $statement->execute();
         while ($row = $statement->fetch()) {
-            $contact = new Contact($this->db);
-            $contact->fillFromDB($row);
-            $contacts[] = $contact;
+            $user = new User($this->db);
+            $user->fillFromDB($row);
+            $users[] = $user;
         }
 
-        return $contacts;
+        return $users;
     }
-    protected function fillFromDB(array $row): Contact
+    protected function fillFromDB(array $row): user
     {
         [
             'id' => $this->id,
-            'name' => $this->name,
-            'phone' => $this->phone,
-            'notes' => $this->notes,
-            'avatar' => $this->avatar,
+            'fullname' => $this->fullname,
+            'email' => $this->email,
+            'phone_number' => $this->phone_number,
+            'address' => $this->address,
+            'dob' => $this->dob,
+            'gender' => $this->gender,
+            'password' => $this->password,
+            'role_id' => $this->role_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ] = $row;
@@ -98,25 +96,25 @@ class Contact
     }
     public function count(): int
     {
-        $statement = $this->db->prepare('select count(*) from contacts');
+        $statement = $this->db->prepare('select count(*) from users');
         $statement->execute();
         return $statement->fetchColumn();
     }
     public function paginate(int $offset = 0, int $limit = 10): array
     {
-        $contacts = [];
+        $users = [];
 
-        $statement = $this->db->prepare('select * from contacts limit :offset, :limit');
+        $statement = $this->db->prepare('select * from users limit :offset, :limit');
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
         $statement->execute();
         while ($row = $statement->fetch()) {
-            $contact = new Contact($this->db);
-            $contact->fillFromDB($row);
-            $contacts[] = $contact;
+            $user = new user($this->db);
+            $user->fillFromDB($row);
+            $users[] = $user;
         }
         
-        return $contacts;
+        return $users;
     }
 
     public function save(): bool
@@ -124,26 +122,33 @@ class Contact
         $result = false;
         if ($this->id >= 0) {
             $statement = $this->db->prepare(
-            'update contacts set name = :name, 
-            phone = :phone, notes = :notes, avatar = :avatar,
-            updated_at = now() where id = :id'
+            'update users set role_id = :role_id, fullname = :fullname, 
+            email = :email, phone_number = :phone_number, address = :address, dob = :dob, gender = :gender, password = :password, updated_at = now() where id = :id'
             );
             $result = $statement->execute([
-                'name' => $this->name,
-                'phone' => $this->phone,
-                'notes' => $this->notes,
-                'avatar' => $this->avatar,
+                'role_id' => $this->role_id,
+                'fullname' => $this->fullname,
+                'email' => $this->email,
+                'phone_number' => $this->phone_number,
+                'address' => $this->address,
+                'dob' => $this->dob,
+                'gender' => $this->gender,
+                'password' => $this->password,
                 'id' => $this->id]);
         } else {
             $statement = $this->db->prepare(
-                'insert into contacts (name, phone, notes, avatar, created_at, updated_at)
-                values (:name, :phone, :notes, :avatar, now(), now())'
+                'insert into users (fullname, email, phone_number, address, dob, gender, password, created_at, updated_at, role_id)
+                values (:fullname, :email, :phone_number, :address, :dob, :gender, :password, now(), now(), :role_id)'
             );
             $result = $statement->execute([
-                'name' => $this->name,
-                'phone' => $this->phone,
-                'notes' => $this->notes,
-                'avatar' => $this->avatar
+                'fullname' => $this->fullname,
+                'email' => $this->email,
+                'phone_number' => $this->phone_number,
+                'address' => $this->address,
+                'dob' => $this->dob,
+                'gender' => $this->gender,
+                'password' => $this->password,
+                'role_id' => $this->role_id
             ]);
             if ($result) {
                 $this->id = $this->db->lastInsertId();
@@ -152,9 +157,9 @@ class Contact
         return $result;
     }
 
-    public function find(int $id): ?Contact
+    public function find(int $id): ?User
     {
-        $statement = $this->db->prepare('select * from contacts where id = :id');
+        $statement = $this->db->prepare('select * from users where id = :id');
         $statement->execute(['id' => $id]);
         if ($row = $statement->fetch()) {
             $this->fillFromDB($row);
@@ -163,10 +168,26 @@ class Contact
 
         return null;
     }
-    public function update(array $data, array $file): bool
+    public function checkRegister(string $email): bool
+    {
+        $statement = $this->db->prepare('select * from users where email = :email');
+        $statement->execute(['email' => $email]);
+        if ($row = $statement->fetch()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function checkLogin(string $email, string $password): int
+    {
+        $statement = $this->db->prepare('select * from users where email = :email and password = :password');
+        $statement->execute(['email' => $email, 'password' => md5($password)]);
+        $row = $statement->fetch();
+        return $row['role_id'];
+    }
+    public function update(array $data): bool
     {
         $this->fill($data);
-        $this->fillAvatar($file);
         if ($this->validate()) {
             return $this->save();
         }
@@ -174,7 +195,7 @@ class Contact
     }
     public function delete(): bool
     {
-        $statement = $this->db->prepare('delete from contacts where id = :id');
+        $statement = $this->db->prepare('delete from users where id = :id');
         return $statement->execute(['id' => $this->id]);
     }
 }

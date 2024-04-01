@@ -7,6 +7,14 @@
         <a href="../category/categories.php">
             Danh Mục
         </a>
+        |
+        <a href="../user/users.php">
+            Tài Khoản
+        </a>
+        |
+        <a href="/home.php">
+            Trang Chủ
+        </a>
     </div>
 
     <div class="collapse navbar-collapse" id="app-navbar-collapse">

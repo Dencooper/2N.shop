@@ -1,18 +1,15 @@
 <?php
 require_once __DIR__ . '/../../utils/bootstrap.php';
-use CT275\Project\Product;
-use CT275\Project\Category;
+use CT275\Project\User;
 
-$product = new Product($PDO);
-$category = new Category($PDO);
+$user = new User($PDO);
 
-$products = $product->all();
-$categories = $category->all();
+$users = $user->all();
 
 include_once __DIR__ . '/../partials/header.php';
 ?>
 <style>
-        .back-product-list a:nth-child(1){
+        .back-product-list a:nth-child(3){
             opacity: 0.5;
             pointer-events: none;
             cursor: default;
@@ -21,25 +18,24 @@ include_once __DIR__ . '/../partials/header.php';
 </head>
 <body>
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
-    <!-- Main Page Content -->
     <div class="container pb-3 mb-3">
-        <h2 class="text-center animate__animated animate__bounce">Quản Lí Sản Phẩm</h2>
+        <h2 class="text-center animate__animated animate__bounce">Quản Lí Tài Khoản</h2>
         <?php
-            $subtitle = 'Thông tin tất cả sản phẩm';
+            $subtitle = 'Thông tin tất cả tài khoản';
             include_once __DIR__ . '/../partials/heading.php';
         ?>
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between" >
                     <div>
-                        <a href="add.php" class="btn btn-primary mb-3">
-                            <i class="fa fa-plus"></i> Thêm sản phẩm
+                        <a href="add.php" class="btn btn-secondary mb-3">
+                            <i class="fa fa-plus"></i> Thêm tài khoản
                         </a>
                     </div>
                     
                     <div class="search mt-2">
                         <form action="search.php" method="get">
-                            <input type="text" name="title" placeholder="Nhập tên danh mục.." style="padding:2px 0 2px 5px; font-size:16px" required oninvalid="this.setCustomValidity('Hãy nhập nội dung!')" />
+                            <input type="text" name="email" placeholder="Nhập email tài khoản.." style="padding:2px 0 2px 5px; font-size:16px" required oninvalid="this.setCustomValidity('Hãy nhập nội dung!')" />
                             <button type="submit" style="padding: 3px 8px; margin-bottom:2px;font-size:16px"  class="btn btn-dark" ><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
@@ -50,35 +46,43 @@ include_once __DIR__ . '/../partials/header.php';
                 <table id="products" class="table table-striped table-bordered">
                     <thead class="text-center">
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Danh Mục</th>
-                            <th scope="col">Tên Sản Phẩm</th>
-                            <th scope="col">Giá Niêm Yết</th>
-                            <th scope="col">Giảm Giá</th>
-                            <th scope="col">Ngày Tạo</th>
-                            <th scope="col">Hình Ảnh 1</th>
-                            <th scope="col">Hình Ảnh 2</th>
+                            <th scope="col">Họ và tên</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Giới tính</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Vai trò</th>
                             <th scope="col">Hành Động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($products as $product):?>
+                        <?php foreach($users as $user):?>
                             <tr class="text-center">
-                                <td class="align-middle"><?=html_escape($product->getId())?></td>
-                                <td class="align-middle"><?=html_escape($product->category_id)?></td>
-                                <td class="align-middle"><?=html_escape($product->title)?></td>
-                                <td class="align-middle formatted-number"><?= html_escape($product->price);?></td>
-                                <td class="align-middle"><?=html_escape($product->discount) . "%" ?></td>
-                                <td class="align-middle"><?=html_escape(date("d-m-Y", strtotime($product->created_at)))?></td>
-                                <td class="align-middle"><img src="../../<?=html_escape($product->thumb1)?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
-                                <td class="align-middle"><img src="../../<?=html_escape($product->thumb2)?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
+                                <td class="align-middle"><?=html_escape($user->fullname)?></td>
+                                <td class="align-middle"><?=html_escape($user->email)?></td>
+                                <td class="align-middle"><?=html_escape($user->phone_number)?></td>
+                                <td class="align-middle"><?=html_escape(date("d-m-Y", strtotime($user->dob)))?></td>
+                                <?php if ($user->gender == 1) :?>
+                                    <td class="align-middle">Nữ</td>
+                                <?php elseif ($user->gender == 2) :?>
+                                    <td class="align-middle">Nam</td>
+                                <?php elseif ($user->gender == 3) :?>
+                                    <td class="align-middle">Khác</td>
+                                <?php endif ?>
+                                <td class="align-middle"><?=html_escape(date("d-m-Y", strtotime($user->created_at)))?></td>
+                                <?php if ($user->role_id == 0) :?>
+                                    <td class="align-middle">Quản trị viên</td>
+                                <?php elseif ($user->role_id == 1) :?>
+                                    <td class="align-middle">Người dùng</td>
+                                <?php endif ?>
                                 <td class="align-middle" style="border-bottom: none">
-                                    <a href="<?= 'edit.php?id=' . $product->getId() ?>" class="btn btn-xs btn-warning">
+                                    <a href="<?= 'edit.php?id=' . $user->getId() ?>" class="btn btn-xs btn-warning">
                                         <i alt="Edit" class="fa fa-pencil"></i> Sửa
                                     </a>
                                     <form class="form mt-3" action="delete.php" method="POST">
-                                        <input type="hidden" name="id" value="<?= $product->getId() ?>"/>
-                                        <button type="submit" class="btn btn-xs btn-danger"             name="delete-product">
+                                        <input type="hidden" name="id" value="<?= $user->getId() ?>"/>
+                                        <button type="submit" class="btn btn-xs btn-danger"             name="delete-user">
                                             <i alt="Delete" class="fa fa-trash"></i> Xóa
                                         </button>
                                     </form>
@@ -117,13 +121,13 @@ include_once __DIR__ . '/../partials/header.php';
     </script>
     <script>
         $(document).ready(function(){
-            $('button[name="delete-product"]').on('click', function(e){
+            $('button[name="delete-user"]').on('click', function(e){
                 e.preventDefault();
                 
                 const form = $(this).closest('form');
-                const nameTd = $(this).closest('tr').find('td').eq(2);
+                const nameTd = $(this).closest('tr').find('td').eq(1);
                 if (nameTd.length > 0) {
-                    $('.modal-body').html(`Bạn muốn xóa sản phẩm "${nameTd.text()}"?`);
+                    $('.modal-body').html(`Bạn muốn xóa tài khoản "${nameTd.text()}"?`);
                 }
                 $('#delete-confirm').modal({
                     backdrop: 'static', keyboard: false
@@ -132,17 +136,6 @@ include_once __DIR__ . '/../partials/header.php';
                     form.trigger('submit');
                 });
             });
-        });
-    </script>
-    <script>
-        function formatNumber(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
-        var numbers =document.querySelectorAll(".formatted-number");
-        var formattedNumber;
-        numbers.forEach(number => {
-            formattedNumber = formatNumber(number.innerHTML);
-            number.innerHTML = formattedNumber;
         });
     </script>
 </body>

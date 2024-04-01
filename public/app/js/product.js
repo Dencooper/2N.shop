@@ -40,7 +40,14 @@ function changeQuatity(){
     quanlity = quanlityInput.value;
 }
 
-
+const galeries = document.querySelectorAll(".galery");
+const bigImages = document.querySelectorAll(".bigImage");
+galeries.forEach(function(galery, index){
+    galeries[index].addEventListener("click", function(){
+        document.querySelector(".bigImage.active").classList.remove("active");
+        bigImages[index].classList.add("active");
+    })
+})
 
 
 

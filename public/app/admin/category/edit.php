@@ -46,8 +46,8 @@ include_once __DIR__ . '/../partials/header.php';
 
                     <!-- name -->
                     <div class="form-group">
-                        <label for="name">Tên Sản Phẩm</label>
-                        <input type="text" name="name" class="form-control<?= isset($errors['name']) ? ' is-invalid' : '' ?>" maxlen="255" id="name" placeholder="Nhập tên sản phẩm" value="<?= html_escape($category->name) ?>" />
+                        <label for="name">Tên Danh Mục</label>
+                        <input type="text" name="name" class="form-control<?= isset($errors['name']) ? ' is-invalid' : '' ?>" maxlen="255" id="name" placeholder="Nhập tên danh mục" value="<?= html_escape($category->name) ?>" />
 
                         <?php if (isset($errors['name'])) : ?>
                             <span class="invalid-feedback">

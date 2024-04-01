@@ -25,38 +25,6 @@ $products = $product->all();
 </head>
 <body>
     <header>
-    </head>
-<body>
-    <header>
-        <div class="container d-flex">
-            <div class="logo">
-                <a href="app/home.php">
-                    <img src="app/images/logo.jpg" alt="">
-                </a>
-            </div>
-            <nav>
-                <div class="menu">
-                    <li><a href="app/frontend/view.php">NỮ</a>
-                    </li>
-                    <li><a href="">NAM</a>
-                    </li>
-                    <li><a href="">TRẺ EM</a>
-
-                    </li>
-                    <li><a href="" class="sale">SALE MÙA LỄ HỘI</a>
-                    </li>
-                    <li><a href="">BỘ SƯU TẬP</a>        
-                    </li>
-                    <li><a href="">VỀ 2N SHOP</a>          
-                    </li>
-            </nav>
-            <div class="others">
-                <li><a href="login.php"><i class="fa-regular fa-user"></i></a></li>
-                <li><a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-            </div>
-        </div>
-        
-    </header>
         <div class="container d-flex">
             <div class="logo">
                 <a href="home.php">
@@ -65,24 +33,15 @@ $products = $product->all();
             </div>
             <nav>
                 <div class="menu">
-                    <li><a href="app/frontend/view.php">NỮ</a>
-                    </li>
-                    <li><a href="">NAM</a>
-                    </li>
-                    <li><a href="">TRẺ EM</a>
-
-                    </li>
-                    <li><a href="" class="sale">SALE MÙA LỄ HỘI</a>
-                    </li>
-                    <li><a href="">BỘ SƯU TẬP</a>        
-                    </li>
-                    <li><a href="">VỀ 2N SHOP</a>          
-                    </li>
+                    <li><a href="app/frontend/category.php">NỮ</a></li>
+                    <li><a href="app/frontend/categoryMen.php">NAM</a></li>
+                    <li><a href="app/frontend/categoryKids.php">TRẺ EM</a></li>
+                    <li><a href="#" class="sale">SALE MÙA LỄ HỘI</a></li>
+                    <li><a href="#">VỀ 2N SHOP</a></li>
             </nav>
             <div class="others">
-                <li><input type="text" placeholder="Tìm kiếm ..." class="search-form"><i class="fa-solid fa-magnifying-glass"></i></li>
-                <li><a href=""><i class="fa-solid fa-headphones"></i></a></li>
-                <li><a href="login.php"><i class="fa-regular fa-user"></i></a></li>
+                <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
+                <li><a href="app/frontend/login.php"><i class="fa-regular fa-user"></i></a></li>
                 <li><a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
             </div>
         </div>
@@ -135,105 +94,57 @@ $products = $product->all();
                 </div>
                 <div class="home-cartegory">
                     <div class="moda active home-cartegory-content">
-                        <div class="cartegory-right-content d-flex">
-                            <?php foreach ($products as $product):?>
-                                <div class="cartegory-right-content-item" style="width: 19%;" >
-                                    <div class="images">
-                                        <img src="app/<?=html_escape($product->thumb1)?>" alt="">
-                                        <img src="app/<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                        <div class="cartegory-right-content d-flex flex-wrap justify-content-start" >
+                            <?php foreach($products as $product): 
+                                if ($product->category_id == 1): ?>
+                                    <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
+                                        <div class="images">
+                                            <img src="app/<?=html_escape($product->thumb1)?>" alt="">
+                                            <img src="app/<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                                        </div>
+                                        <p style="height:45px;" ><?=html_escape($product->title)?></p>
+                                        <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01))?>đ </strong><del><?=html_escape($product->price)?>đ</del></p>
+                                        <div class="add-to-cart">
+                                            
+                                        </div>
                                     </div>
-                                    <p style="height: 40px"><?= html_escape($product->tittle)?></p>
-                                    <p class="formatted-number"><strong><?= html_escape($product->price * $product->discount * 0.01)?>đ </strong><del><?= html_escape($product->price) ?>đ</del></p>
-                                </div>
-                            <?php endforeach ?>
+                            <?php endif; endforeach ?>
                         </div>   
                     </div>
                     <div class="men home-cartegory-content">
-                        <div class="cartegory-right-content d-flex">
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/men/sp1.1.jpg" alt="">
-                                    <img src="images/men/sp1.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/men/sp2.1.jpg" alt="">
-                                    <img src="images/men/sp2.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/men/sp3.1.jpg" alt="">
-                                    <img src="images/men/sp3.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/men/sp4.1.jpg" alt="">
-                                    <img src="images/men/sp4.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/men/sp5.1.jpg" alt="">
-                                    <img src="images/men/sp5.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
+                        <div class="cartegory-right-content d-flex justify-content-start">
+                            <?php foreach($products as $product): 
+                                if ($product->category_id == 6): ?>
+                                    <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
+                                        <div class="images">
+                                            <img src="app/<?=html_escape($product->thumb1)?>" alt="">
+                                            <img src="app/<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                                        </div>
+                                        <p><?=html_escape($product->title)?></p>
+                                        <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01))?>đ </strong><del><?=html_escape($product->price)?>đ</del></p>
+                                        <div class="add-to-cart">
+                                            
+                                        </div>
+                                    </div>
+                            <?php endif; endforeach ?>
                         </div>   
                     </div>
                     <div class="kids home-cartegory-content">
-                        <div class="cartegory-right-content d-flex">
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/kids/sp1.1.jpg" alt="">
-                                    <img src="images/kids/sp1.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/kids/sp2.1.jpg" alt="">
-                                    <img src="images/kids/sp2.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/kids/sp3.1.jpg" alt="">
-                                    <img src="images/kids/sp3.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/kids/sp4.1.jpg" alt="">
-                                    <img src="images/kids/sp4.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
-                            <div class="cartegory-right-content-item">
-                                <div class="images">
-                                    <img src="images/kids/sp5.1.jpg" alt="">
-                                    <img src="images/kids/sp5.2.jpg" class="img-hover" alt="">
-                                </div>
-                                <p>Áo Khoác Twill Dáng Lửng</p>
-                                <p><strong>745.000đ </strong><del>1.490.000đ</del></p>
-                            </div>
+                        <div class="cartegory-right-content d-flex justify-content-start">
+                            <?php foreach($products as $product): 
+                                if ($product->category_id == 8): ?>
+                                    <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
+                                        <div class="images">
+                                            <img src="app/<?=html_escape($product->thumb1)?>" alt="">
+                                            <img src="app/<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
+                                        </div>
+                                        <p><?=html_escape($product->title)?></p>
+                                        <p class="formatted-number" ><strong><?=html_escape($product->price - ($product->discount * $product->price * 0.01))?>đ </strong><del><?=html_escape($product->price)?>đ</del></p>
+                                        <div class="add-to-cart">
+                                            
+                                        </div>
+                                    </div>
+                            <?php endif; endforeach ?>
                         </div>   
                     </div>
                 </div>
@@ -399,6 +310,11 @@ $products = $product->all();
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app/js/script.js"></script>
+    <script>
+        function product_detail(productId){
+            window.location.href = "app/frontend/product.php?id=" + productId;
+        }
+    </script>
     <script>
         function formatNumber(number) {
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

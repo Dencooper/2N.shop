@@ -13,8 +13,8 @@
                             <img src="../images/footer/footer2.png" alt="">
                         </a>
                     </div>
-                    <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 018629064</p>
-                    <p><strong>Địa chỉ đăng ký:</strong> đường 3/2, phường Xuân Khánh, Quận Ninh Kiều, thành phô Cần Thơ</p>
+                    <p>Công ty Cổ phần Dự Kim với số đăng kí kinh doanh: 018629064</p>
+                    <p><strong>Địa chỉ đăng ký:</strong> đường 3/2, phường Xuân Khánh, Quận Ninh Kiều, thành phố Cần Thơ</p>
                     <p><strong>Số điện thoại:</strong> 0933 205 2222/ 090 589 9870</p>
                     <p><strong>Email:</strong> lephuongnam958506@gmail.com</p>
                     <ul class="list-social">

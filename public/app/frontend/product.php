@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../utils/bootstrap.php';
+session_start();
 use CT275\Project\Product;
 
 $product = new Product($PDO);

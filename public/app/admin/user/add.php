@@ -107,12 +107,12 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-6">
                             <!-- gender -->
                             <div class="form-group">
-                                <label for="gender">Giới tinh</label>
+                                <label for="gender">Giới tính</label>
                                 <br>
                                 <select name="gender" id="gender" class="form-control">
                                     <option value="" style="display: none;">-- Giới tính --</option>
-                                    <option value=1>Nam</option>
-                                    <option value=2>Nữ</option>
+                                    <option value=1>Nữ</option>
+                                    <option value=2>Nam</option>
                                     <option value=3>Khác</option>
                                 </select>
                             </div>

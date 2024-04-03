@@ -178,7 +178,7 @@ class User
         return true;
     }
 
-    public function checkLogin(string $email, string $password): ?int
+    public function checkLogin(string $email, string $password): int
     {
         $statement = $this->db->prepare('select * from users where email = :email and password = :password');
         $statement->execute(['email' => $email, 'password' => md5($password)]);

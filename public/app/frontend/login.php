@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../utils/bootstrap.php';
+session_start();
 use CT275\Project\User;
 
 $user = new User($PDO);
@@ -9,16 +10,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $role = $user->checkLogin($email, $password);
-        if ($role == 1){
+        if ($role === 1){
             echo "<script>alert(\"Chào mừng bạn đến với 2N Shop!\");</script>";
+            $_SESSION['logged_in'] = true;
             header('location: ../../home.php');
+            exit();
         } 
-        else if ($role == 0){
+        else if ($role === 0){
             echo "<script>alert(\"Bạn là Quản Trị Viên!!\");</script>";
             header('location: ../../app/admin/product/products.php');
         } 
         else {
-            $txt_error = "Username hoặc Password không tồn tại";
+            echo "<script>alert(\"Username hoặc Password không tồn tại!\");</script>";
         }
         
     }

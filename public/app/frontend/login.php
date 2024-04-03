@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
         $role = $user->checkLogin($email, $password);
         if ($role === 1){
-            echo "<script>alert(\"Chào mừng bạn đến với 2N Shop!\");</script>";
             $_SESSION['logged_in'] = true;
             header('location: ../../home.php');
             exit();

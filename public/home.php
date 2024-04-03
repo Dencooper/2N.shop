@@ -1,7 +1,11 @@
 <?php
 require_once __DIR__ . '/app/utils/bootstrap.php';
 use CT275\Project\Product;
-
+session_start();
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    echo "<script>alert(\"Chào mừng bạn đến với 2N Shop!\");</script>";
+    unset($_SESSION['logged_in']);
+}
 $product = new Product($PDO);
 
 $products = $product->all();

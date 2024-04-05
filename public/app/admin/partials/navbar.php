@@ -19,8 +19,8 @@
 
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+            <li><a href=""><?= $user->fullname?></a></li>
+            <li><a href="../../frontend/logout.php" data-bs-toggle="tooltip" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></i></a></li>
         </ul>
     </div>
 </nav>

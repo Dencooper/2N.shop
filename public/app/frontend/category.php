@@ -3,7 +3,6 @@ require_once __DIR__ . '/../utils/bootstrap.php';
 use CT275\Project\Product;
 
 $product = new Product($PDO);
-
 $products = $product->all();
 
 include_once __DIR__ . '/partials/header.php';

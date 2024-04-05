@@ -1,3 +1,20 @@
+<?php 
+use CT275\Project\User;
+session_start();
+$user = new User($PDO);
+if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['session_cookie'] == session_id()){
+    $user = $user->findEmail($_SESSION['email']);
+    if($user->role_id === 1) {
+        header("Location: ../../../home.php");
+        exit();
+    }
+}
+else{
+    header("Location: ../../../home.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

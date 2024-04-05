@@ -53,7 +53,7 @@ include_once __DIR__ . '/partials/navbar.php';
                             </ul>
                         </div>
                         <div class="product-content-right-size">
-                            <ul class="d-flex">
+                            <ul class="d-flex list-size">
                                 <li class="button-size">S</li>
                                 <li class="button-size">M</li>
                                 <li class="button-size">L</li>

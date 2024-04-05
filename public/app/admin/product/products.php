@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../utils/bootstrap.php';
+
 use CT275\Project\Product;
 use CT275\Project\Category;
 

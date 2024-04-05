@@ -36,6 +36,19 @@ buttonColors.forEach(function(buttonColor, index){
     })
 })
 
+const buttonSizes = document.querySelectorAll(".list-size .button-size");
+buttonSizes.forEach(function(buttonSize, index){
+    buttonSize.addEventListener("click", function(){
+        var count = document.querySelectorAll(".list-size .button-size.active").length;
+        if(count == 1){
+            document.querySelector(".list-size .button-size.active").classList.remove("active");
+            buttonSize.classList.add("active");
+        } else {
+            buttonSize.classList.add("active");
+        }
+    })
+})
+
 function changeQuatity(){
     quanlity = quanlityInput.value;
 }

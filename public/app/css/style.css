@@ -207,11 +207,11 @@ header .container{
     display: flex;
     justify-content: right;
 }
-.others > li{
-    padding: 0 12px;
+.others > li, .navbar-nav > li {
+    padding: 0 8px;
     align-self: center;
 }
-.others > li a{
+.others > li a, .navbar-nav > li a{
     color: black;
     font-size: 16px;
 }
@@ -1621,9 +1621,6 @@ thead{
 /* Site footer */
 
 /* Admin */
-.navbar-nav li a{
-    font-size: 14px;
-}
 .preview-image{
     margin-left: 60px;
 }

@@ -3,9 +3,17 @@
 define('TITLE', 'Logout');
 
 
-if (isset($_SESSION['role'])) {
-    unset($_SESSION['role']);
-}
-header('location: login.php');
+session_start();
 
-echo '<p>Bạn đã đăng xuất.</p>';
+unset($_SESSION['email']);
+
+if (isset($_COOKIE['user_id'])) {
+    setcookie('user_id', '', time() - 3600, '/');
+}
+
+session_unset();
+
+session_destroy();
+
+header("Location: ../../home.php");
+exit();

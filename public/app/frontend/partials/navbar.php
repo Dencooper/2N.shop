@@ -18,9 +18,15 @@
                     <li><a href="">VỀ 2N SHOP</a></li>
             </nav>
             <div class="others">
-                <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
-                <li><a href="register.php"><i class="fa-regular fa-user"></i></a></li>
-                <li><a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <?php if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['session_cookie'] == session_id()):?>
+                    <li><a href=""><?= $user->fullname?></a></li>
+                    <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
+                    <li><a href="logout.php" data-bs-toggle="tooltip" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></i></a></li>
+                <?php else: ?>
+                    <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
+                    <li><a href="login.php" data-bs-toggle="tooltip" title="Đăng nhập"><i class="fa-solid fa-user"></i></i></i></a></li>
+                    <li><a href="register.php" data-bs-toggle="tooltip" title="Đăng kí"><i class="fa-solid fa-user-plus"></i></a></li>
+                <?php endif?>
             </div>
         </div>
         

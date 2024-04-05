@@ -3,21 +3,27 @@ require_once __DIR__ . '/../utils/bootstrap.php';
 session_start();
 use CT275\Project\User;
 
-$user = new User($PDO);
+if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['session_cookie'] == session_id()) {
+    header('location: ../../home.php');
+}
 
+$user = new User($PDO);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['email']) && !empty($_POST['password'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
         $role = $user->checkLogin($email, $password);
         if ($role === 1){
-            $_SESSION['logged_in'] = true;
+            $_SESSION['email'] = $email;
+            setcookie('session_cookie', session_id(), time() + 3600, '/'); 
             header('location: ../../home.php');
             exit();
         } 
         else if ($role === 0){
-            echo "<script>alert(\"Bạn là Quản Trị Viên!!\");</script>";
+            $_SESSION['email'] = $email;
+            setcookie('session_cookie', session_id(), time() + 3600, '/'); 
             header('location: ../../app/admin/product/products.php');
+            exit();
         } 
         else {
             echo "<script>alert(\"Username hoặc Password không tồn tại!\");</script>";
@@ -27,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 include_once __DIR__ . '/partials/header.php';
 ?>
-<title>Đăng kí tài khoản | 2N Shop</title>
+<title>Đăng nhập | 2N Shop</title>
 <?php include_once __DIR__ . '/partials/navbar.php' ?>
 
         <div class="container" style="padding-bottom: 50px; padding-top: 80px;">

@@ -168,6 +168,18 @@ class User
 
         return null;
     }
+
+    public function findEmail(string $email): ?User
+    {
+        $statement = $this->db->prepare('select * from users where email = :email');
+        $statement->execute(['email' => $email]);
+        if ($row = $statement->fetch()) {
+            $this->fillFromDB($row);
+            return $this;
+        }
+
+        return null;
+    }
     public function checkRegister(string $email): bool
     {
         $statement = $this->db->prepare('select * from users where email = :email');

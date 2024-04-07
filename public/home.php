@@ -34,7 +34,7 @@ $products = $product->all();
         <div class="container d-flex">
             <div class="logo">
                 <a href="home.php">
-                    <img src="app/images/logo.jpg" alt="">
+                    <img src="app/images/logo.png" alt="">
                 </a>
             </div>
             <nav>
@@ -183,7 +183,7 @@ $products = $product->all();
                 <div class="left-footer">
                     <div class="top-left">
                         <a href="">
-                            <img src="app/images/logo.jpg" alt="" style="height: 50px; width: 50px;" >
+                            <img src="app/images/logo.png" alt="" style="height: 50px; width: 50px;" >
                         </a>
                         <a href="#" class="mt-3">
                             <img src="app/images/footer/footer1.png" alt="">

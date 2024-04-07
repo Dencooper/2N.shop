@@ -4,7 +4,7 @@
                 <div class="left-footer">
                     <div class="top-left">
                         <a href="">
-                            <img src="../images/logo.jpg" alt="" style="height: 50px; width: 50px;" >
+                            <img src="../images/logo.png" alt="" style="height: 50px; width: 50px;" >
                         </a>
                         <a href="#" class="mt-3">
                             <img src="../images/footer/footer1.png" alt="">

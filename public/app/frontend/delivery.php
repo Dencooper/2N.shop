@@ -53,7 +53,7 @@ include_once __DIR__ . '/partials/navbar.php';
                             <div class="delivery-method">
                                 <h3>Phương thức giao hàng</h3>
                                 <div class="method">
-                                    <input type="radio" id="fast-method" required>
+                                    <input type="radio" value="fast-method" name="ship-method" required>
                                     <label for="fast-method">Chuyển phát nhanh</label>
                                     <p>Thời gian giao hàng dự kiến: <?= date('d/m/Y', $expectedTime)?></p>
                                 </div>

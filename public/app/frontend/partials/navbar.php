@@ -4,7 +4,7 @@
         <div class="container d-flex">
             <div class="logo">
                 <a href="../../home.php">
-                    <img src="../images/logo.jpg" alt="">
+                    <img src="../images/logo.png" alt="">
                 </a>
             </div>
             <nav>

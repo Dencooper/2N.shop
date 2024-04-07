@@ -130,7 +130,7 @@ include_once __DIR__ . '/partials/navbar.php';
                         </div>      
                         <div class="cartegory-right-content d-flex">
                             <?php foreach($products as $product): 
-                                if ($product->category_id == 8): ?>
+                                if ($product->category_id == 3): ?>
                                     <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="../<?=html_escape($product->thumb1)?>" alt="">

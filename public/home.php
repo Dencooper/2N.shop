@@ -144,7 +144,7 @@ $count = 0;
                     <div class="men home-cartegory-content">
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
-                                if ($product->category_id == 6): ?>
+                                if ($product->category_id == 2): ?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">
@@ -162,7 +162,7 @@ $count = 0;
                     <div class="kids home-cartegory-content">
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
-                                if ($product->category_id == 8): ?>
+                                if ($product->category_id == 3): ?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">

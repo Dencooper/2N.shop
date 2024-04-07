@@ -122,10 +122,10 @@ $count = 0;
                     <div class="moda active home-cartegory-content">
                         <div class="cartegory-right-content d-flex flex-wrap justify-content-start" >
                             <?php foreach($products as $product):
-                                if ($count > 6) {
+                                $count++;
+                                if ($count > 5) {
                                     break;
                                 }
-                                $count++;
                                 if ($product->category_id == 1): ?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
@@ -145,7 +145,7 @@ $count = 0;
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
                                 if ($product->category_id == 6): ?>
-                                    <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
+                                    <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">
                                             <img src="app/<?=html_escape($product->thumb2)?>" class="img-hover" alt="">
@@ -163,7 +163,7 @@ $count = 0;
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
                                 if ($product->category_id == 8): ?>
-                                    <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
+                                    <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">
                                             <img src="app/<?=html_escape($product->thumb2)?>" class="img-hover" alt="">

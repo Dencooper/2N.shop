@@ -1,11 +1,8 @@
 <?php
 require_once __DIR__ . '/../utils/bootstrap.php';
-session_start();
-use CT275\Project\User;
+include_once __DIR__ . '/partials/header.php';
 
-if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['session_cookie'] == session_id()) {
-    header('location: ../../home.php');
-}
+use CT275\Project\User;
 
 $user = new User($PDO);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
     }
 }
-include_once __DIR__ . '/partials/header.php';
+
 ?>
 <title>Đăng nhập | 2N Shop</title>
 <?php include_once __DIR__ . '/partials/navbar.php' ?>

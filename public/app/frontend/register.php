@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/../utils/bootstrap.php';
+include_once __DIR__ . '/partials/header.php';
+
 use CT275\Project\User;
 
 $user = new User($PDO);
-include_once __DIR__ . '/partials/header.php';
 ?>
 <title>Đăng kí tài khoản | 2N Shop</title>
 

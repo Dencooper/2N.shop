@@ -15,7 +15,21 @@
                     </li>
                     <li><a href="categoryKids.php">TRẺ EM</a></li>
                     <li><a href="" class="sale">SALE MÙA LỄ HỘI</a>
-                    <li><a href="">VỀ 2N SHOP</a></li>
+                    <li>
+                        <?php
+                            $role = $user->role_id;
+                            if ($role === 0){
+                                echo '<a href="../admin/product/products.php">
+                                QUẢN LÍ DANH MỤC
+                                </a>';
+                            } 
+                            else{
+                                echo '<a href="">
+                                VỀ 2N SHOP
+                                </a>';
+                            }
+                        ?>
+                    </li>
             </nav>
             <div class="others">
                 <?php if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['session_cookie'] == session_id()):?>

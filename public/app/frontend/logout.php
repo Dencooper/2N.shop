@@ -7,8 +7,8 @@ session_start();
 
 unset($_SESSION['email']);
 
-if (isset($_COOKIE['user_id'])) {
-    setcookie('user_id', '', time() - 3600, '/');
+if (isset($_COOKIE['session_cookie'])) {
+    setcookie('session_cookie', '', time() - 3600, '/');
 }
 
 session_unset();

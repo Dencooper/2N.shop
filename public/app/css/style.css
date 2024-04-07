@@ -656,14 +656,20 @@ del{
 .product-content-right-color{
     margin-top: 20px;
 }
+
 .product-content-right-color p{
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 17px;
 }
-.product-content-right-color ul{
-    margin-top: 18px;
+
+.product-content-right-color p span{
+    font-weight: 500;
 }
-.product-content-right-color li{
+
+.product-content-right-color .list-color{
+    margin-top: 16px;
+}
+
+.product-content-right-color .list-color label .button-color{
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -671,17 +677,18 @@ del{
     margin: 0 8px;
     cursor: pointer;
     position: relative;
+    display: block;
 }
-.product-content-right-color li:hover{
+.product-content-right-color .button-color:hover{
     border: 2px solid #221F20;
 }
-.product-content-right-color li.active{
+.product-content-right-color .button-color.active{
     border: 2px solid #221F20;
 }
-.product-content-right-color li:nth-child(2){
+.product-content-right-color .list-color label:nth-child(2) .button-color{
     background-color:  #996515;
 }
-.product-content-right-color li:nth-child(3){
+.product-content-right-color .list-color label:nth-child(3) .button-color{
     background-color: #bcb552;
 }
 .product-content-right-size{
@@ -692,7 +699,7 @@ del{
 }
 .product-content-right-size .button-size{
     width: 50px;
-    padding: 10px 0 8px;
+    padding: 10px 0px 8px;
     text-align: center;
     margin-right: 10px;
     border-radius: 2px;
@@ -700,6 +707,7 @@ del{
     transition: 0s;
     cursor: pointer;
     border: 0.8px solid #ccc;
+    display:block
 }
 .product-content-right-size .button-size.active{
     border: 0.8px solid #221f20;
@@ -774,14 +782,6 @@ del{
     width: 100%;
     max-width: 50px;
     font-size: 18px;
-}
-.product-content-right-action button:hover{
-    background-color: #221F20;
-    color: #E7E8E9;
-}
-.product-content-right-action button:nth-child(1):hover{
-    color: #221F20;
-    background-color: #fff;
 }
 .product-content-right-action-find{
     margin-top: 10px;
@@ -896,12 +896,12 @@ del{
 }
 .cart-top ul::before{
     content: '';
-    width: 72%;
+    width: 64%;
     height: 5px;
     position: absolute;
     background-color: #c4c3c3;
     top: 30%;
-    left: 12%;
+    left: 16%;
  }
 .cart-top li{
     font-size: 13px;
@@ -955,17 +955,9 @@ del{
     position: absolute;
     background-color:  #0f0f0f;
     top: 4px;
-    right: 30px;
+    right: 80px;
 }
-.cart-top li.active:nth-child(4)::after{
-    height: 5px;
-    content: '';
-    width: 2000px;
-    position: absolute;
-    background-color:  #0f0f0f;
-    top: 4px;
-    right: 70px;
-}
+
 
 .cart-main{
     margin-top: 40px;
@@ -1087,12 +1079,9 @@ thead{
     padding: 22px;
     background: rgba(247, 248, 249, 0.5);
     border-radius: 5px;
-    padding-bottom: 40px;
 }
 .cart-summary-overview{
     padding-bottom: 10px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
 }
 .cart-summary-overview h3{
     margin-bottom: 10px !important;
@@ -1105,6 +1094,10 @@ thead{
     font-size: 14px !important;
     line-height: 16px;
     padding: 0 !important;
+}
+.cart-summary-overview-item.total {
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
 }
 .cart-summary h3{
     padding: 10px 0;
@@ -1305,42 +1298,13 @@ thead{
 }
 /* Payment */
 .payment-main{
-    width: 1000px;
+    max-width: 500px;
     margin: auto; 
     margin-top: 40px;
 }
 .payment-left{
     padding-right: 10px;
     flex: 3;
-}
-.list-bank{
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.search-bank{
-    position: relative;
-}
-.search-bank input{
-    padding: 0 35px;
-    border: 0.8px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    height: 40px;
-}
-.search-bank i{
-    position: absolute;
-    height: 40px;
-    font-size: 18px;
-    top: 10px;
-    left: 10px;
-    color: #7e7f80;
-}
-
-.payment-right{
-    padding-left: 10px;
-    flex: 2;
 }
 .detail-info{
     margin-top: 20px;
@@ -1353,6 +1317,9 @@ thead{
     padding: 10px;
     background-color: #f2f3f4;
     border-radius: 5px;
+}
+.payment-title p{
+    font-size: 16px;
 }
 .detail-info p{
     font-size: 14px;

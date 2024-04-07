@@ -1,12 +1,11 @@
 <?php
 require_once __DIR__ . '/../utils/bootstrap.php';
+include_once __DIR__ . '/partials/header.php';
+
 use CT275\Project\Product;
 
 $product = new Product($PDO);
-
 $products = $product->all();
-
-include_once __DIR__ . '/partials/header.php';
 ?>
     <title>Danh Mục - Nam | 2N Shop</title>
 <?php

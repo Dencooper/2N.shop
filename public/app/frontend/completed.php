@@ -1,5 +1,14 @@
 <?php
+require_once __DIR__ . '/../utils/bootstrap.php';
 include_once __DIR__ . '/partials/header.php';
+
+if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && ($_COOKIE['session_cookie'] == session_id())){
+    $user = $user->findEmail($_SESSION['email']);
+}
+else{
+    header('location: login.php');
+    exit();
+}
 ?>
     <title>Hoàn tất đơn hàng</title>
 <?php
@@ -9,7 +18,6 @@ include_once __DIR__ . '/partials/navbar.php';
         <div class="container">
             <div class="cart-top">
                 <ul>
-                    <li class="active">Giỏ hàng</li>
                     <li class="active">Đặt hàng</li>
                     <li class="active">Thanh toán</li>
                     <li class="active">Hoàn thành hóa đơn</li>

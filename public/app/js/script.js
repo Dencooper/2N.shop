@@ -1,9 +1,3 @@
-function slideGallery(){
-    const imgGallery = document.querySelectorAll(".items img");
-    document.querySelector(".items").appendChild(imgGallery[0]);
-}
-setInterval(slideGallery, 5000);
-
 const exclusiveTabs = document.querySelectorAll(".exclusive-tab");
 const homeCartegoryContents = document.querySelectorAll(".home-cartegory-content");
 exclusiveTabs.forEach(function(tittleItem, index){

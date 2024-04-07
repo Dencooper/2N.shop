@@ -18,4 +18,4 @@ if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['s
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/logo.jpg" type="image/png" sizes="20x20">
+    <link rel="icon" href="../images/logo.png" type="image/png" sizes="20x20">

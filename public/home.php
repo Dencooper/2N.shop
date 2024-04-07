@@ -11,7 +11,7 @@ if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['s
     $user = $user->findEmail($_SESSION['email']);
 }
 $products = $product->all();
-
+$count = 0;
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ $products = $product->all();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="icon" href="app/images/logo.jpg" type="image/png" sizes="20x20">
+    <link rel="icon" href="app/images/logo.png" type="image/png" sizes="20x20">
     <title>Trang Chủ | 2N Shop</title>
 </head>
 <body>
@@ -121,7 +121,11 @@ $products = $product->all();
                 <div class="home-cartegory">
                     <div class="moda active home-cartegory-content">
                         <div class="cartegory-right-content d-flex flex-wrap justify-content-start" >
-                            <?php foreach($products as $product): 
+                            <?php foreach($products as $product):
+                                if ($count > 6) {
+                                    break;
+                                }
+                                $count++;
                                 if ($product->category_id == 1): ?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">

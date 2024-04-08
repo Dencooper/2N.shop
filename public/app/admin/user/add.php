@@ -226,7 +226,7 @@ include_once __DIR__ . '/../partials/header.php';
                     address: "Bạn chưa nhập địa chỉ",
                     role_id: "Bạn chưa chọn vai trò",
                     dob: "Bạn chưa chọn ngày sinh",
-                    gender: "Bạn chưa chọn giới tinh"
+                    gender: "Bạn chưa chọn giới tính"
                 },
                 errorElement: "div",
                 errorPlacement: function (error, element) {

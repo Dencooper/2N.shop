@@ -1433,6 +1433,15 @@ thead{
     padding: 13px;
     font-size: 14px;
 }
+
+/* FAQ */
+.faq p , .faq a{
+    font-size: 14px;
+}
+.faq .collapse p{
+    font-weight: 300;
+}
+
 /* Site bottom */
 .site-bottom {
     padding: 30px 0 0;

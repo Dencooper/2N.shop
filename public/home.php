@@ -65,7 +65,7 @@ $count = 0;
                     <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
                     <li><a href="app/frontend/logout.php" data-bs-toggle="tooltip" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></i></a></li>
                 <?php else: ?>
-                    <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
+                    <li><a href="app/frontend/faq.php"><i class="fa-solid fa-headphones"></i></a></li>
                     <li><a href="app/frontend/login.php" data-bs-toggle="tooltip" title="Đăng nhập"><i class="fa-solid fa-user"></i></i></i></a></li>
                     <li><a href="app/frontend/register.php" data-bs-toggle="tooltip" title="Đăng kí"><i class="fa-solid fa-user-plus"></i></a></li>
                 <?php endif?>
@@ -122,11 +122,11 @@ $count = 0;
                     <div class="moda active home-cartegory-content">
                         <div class="cartegory-right-content d-flex flex-wrap justify-content-start" >
                             <?php foreach($products as $product):
-                                $count++;
-                                if ($count > 5) {
-                                    break;
-                                }
-                                if ($product->category_id == 1): ?>
+                                if ($product->category_id == 1): 
+                                    $count++;
+                                    if ($count > 5) {
+                                        break;
+                                    }?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">
@@ -144,7 +144,11 @@ $count = 0;
                     <div class="men home-cartegory-content">
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
-                                if ($product->category_id == 6): ?>
+                                if ($product->category_id == 6): 
+                                    $count++;
+                                    if ($count > 5) {
+                                        break;
+                                    }?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">
@@ -162,7 +166,11 @@ $count = 0;
                     <div class="kids home-cartegory-content">
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
-                                if ($product->category_id == 8): ?>
+                                if ($product->category_id == 8): 
+                                    $count++;
+                                    if ($count > 5) {
+                                        break;
+                                    }?>
                                     <div class="cartegory-right-content-item" style="width:20%" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="app/<?=html_escape($product->thumb1)?>" alt="">

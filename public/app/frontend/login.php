@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $role = $user->checkLogin($email, $password);
         if ($role === 1){
             $_SESSION['email'] = $email;
-            setcookie('session_cookie', session_id(), time() + 3600, '/'); 
+            setcookie('session_cookie', session_id(), time() + 3600, '/');
             header('location: ../../home.php');
             exit();
         } 
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } 
         else {
-            echo "<script>alert(\"Username hoặc Password không tồn tại!\");</script>";
+            echo "<script>alert(\"Email hoặc password không tồn tại!\");</script>";
         }
         
     }

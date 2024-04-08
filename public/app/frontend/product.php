@@ -17,7 +17,6 @@ include_once __DIR__ . '/partials/navbar.php';
                 <form action="delivery.php" method="get">
                     <div class="product-content d-flex">
                         <div class="product-content-left d-flex">
-                            <input type="hidden" name="thumb" value="<?= html_escape($detailProduct->thumb1) ?>">
                             <div class="product-content-left-big-img">
                                 <img src="../<?= html_escape($detailProduct->thumb1) ?>" alt="" class="bigImage active">
                                 <img src="../<?= html_escape($detailProduct->thumb2) ?>" alt="" class="bigImage">

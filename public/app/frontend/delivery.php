@@ -11,6 +11,11 @@ else{
 }
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 $expectedTime = time() + (3 * 24 * 60 * 60);
+setcookie('product_id', $_GET['id'], time() + 3600 * 24, '/');
+setcookie('color', $_GET['color'], time() + 3600 * 24, '/');
+setcookie('size', $_GET['size'], time() + 3600 * 24, '/');
+setcookie('quantity', $_GET['quantity'], time() + 3600 * 24, '/');
+setcookie('expectedTime', date('d/m/Y', $expectedTime), time() + 3600 * 24, '/');
 ?>
     <title>Đơn hàng của bạn | 2N SHOP</title>
 <?php

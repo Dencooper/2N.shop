@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Ngày sinh:<span style="color: red;">*</span></label>
-                                <input type="date" id="dob" name="dob" class="form-control" placeholder="Ngày sinh.." style="width: 100%;">
+                                <input type="date" id="dob" name="dob" class="form-control" placeholder="Ngày sinh.." style="width: 100%;" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -104,11 +104,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                     <div class="checked-me mb-1">
-                        <input type="checkbox" id="username" name="email_username" class="me-2">
+                        <input type="checkbox" id="username" name="email_username" class="me-2" required>
                         <label for="regis">Email là tên tài khoản</label>
                     </div>
                     <div class="checked-me mb-1">
-                        <input type="checkbox" id="agree" name="agree" class="me-2">
+                        <input type="checkbox" id="agree" name="agree" class="me-2" required>
                         <label for="agree">Đồng ý với các <a href="" style="color: rgb(237, 97, 97); font-size: 14px;">điều khoản</a> của IVY</label>
                     </div>
                     <div class="checked-me mb-3">
@@ -145,7 +145,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         required: true,
                         minlength: 6,
                         equalTo: "#password"
-                    }    
+                    },
+                    dob: {
+                        required: true,
+                    },
+                    gender: {
+                        required: true,
+                    },
+                    address: {
+                        required: true,
+                    },
+                    email_username: {
+                        required: true,
+                    },  
+                    agree: {
+                        required: true,
+                    }
+                   
                 },
                 messages: {
                     fullname: {
@@ -169,7 +185,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         minlength: "Mật khẩu phải có ít nhất 5 ký tự",
                         equalTo: "Mật khẩu không trùng khớp với mật khẩu trên"
                     },
-                    address: "Bạn chưa nhập địa chỉ"
+                    address: "Bạn chưa nhập địa chỉ",
+                    dob: "Bạn chưa chọn ngày sinh",
+                    email_username: "Bạn chưa chọn xác nhận tên tài khoản",
+                    agree: "Bạn chưa đồng ý với điều khoản của 2N",
+                    gender: "Bạn chưa chọn giới tính"
                 },
                 errorElement: "div",
                 errorPlacement: function (error, element) {

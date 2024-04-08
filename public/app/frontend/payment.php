@@ -9,6 +9,8 @@ else{
     header('location: login.php');
     exit();
 }
+setcookie('ship-method', $_GET['ship-method'], time() + 3600, '/');
+setcookie('payment-method', $_GET['payment-method'], time() + 3600, '/');
 ?>
     <title>Thanh toán</title>
 <?php

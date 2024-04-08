@@ -4,14 +4,24 @@ use CT275\Project\User;
 
 $user = new User($PDO);
 $errors = [];
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user = new User($PDO);
-    $user->fill($_POST);
-    if ($user->validate()) {
-        $user->save() && redirect('/app/admin/user/users.php');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!empty($_POST['fullname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+        if (!($user->checkRegister($_POST['email']))) {
+            echo "<script>alert(\"Email đã được sử dụng!\");</script>";
+        } else {
+            $user = new User($PDO);
+            $user->fill($_POST);
+            if ($user->validate()) {
+                $user->save();
+                header('Location: login.php');
+                exit();
+            }
+            $errors = $user->getValidationErrors();
+            
+        }
+    } else {
+        echo "Vui lòng điền đầy đủ thông tin cần thiết!";
     }
-
-    $errors = $user->getValidationErrors();
 }
 include_once __DIR__ . '/../partials/header.php';
 ?>
@@ -183,7 +193,7 @@ include_once __DIR__ . '/../partials/header.php';
                     },
                     phone_number: {
                         required: true,
-                        tel: true
+                        minlength: 9,
                     },
                     dob: {
                         required: true,
@@ -212,7 +222,7 @@ include_once __DIR__ . '/../partials/header.php';
                     },
                     phone_number: {
                         required: "Bạn chưa nhập số điện thoại",
-                        email: "Số điện thoại khồng hợp lệ"
+                        minlength: "Số điện thoại không hợp lệ",
                     },
                     password: {
                         required: "Bạn chưa nhập mật khẩu",

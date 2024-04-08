@@ -3,9 +3,11 @@ require_once __DIR__ . '/../utils/bootstrap.php';
 include_once __DIR__ . '/partials/header.php';
 
 use CT275\Project\Product;
-
 $product = new Product($PDO);
 $products = $product->all();
+if (!isset($_GET['id'])) {
+    exit();
+}
 ?>
     <title>Danh Mục - Nữ | 2N Shop</title>
 <?php
@@ -15,7 +17,12 @@ include_once __DIR__ . '/partials/navbar.php';
         <div class="container">
             <section class="cartegory">
                 <div class="cartegory-top d-flex">
-                    <a href="../../home.php">Trang chủ </a><span>&#8212;</span><p>Nữ</p>
+                    <a href="../../home.php">Trang chủ </a><span>&#8212;</span><p><?php if ($_GET['id'] == 1) {    
+                            echo "Nữ";}
+                        elseif ($_GET['id'] == 6) {
+                            echo "Nam";}
+                        else echo "Trẻ em";?>
+                        </p>
                 </div>
                 <div class="d-flex">
                     <div class="cartegory-left">
@@ -130,7 +137,7 @@ include_once __DIR__ . '/partials/navbar.php';
                         </div>      
                         <div class="cartegory-right-content d-flex justify-content-start">
                             <?php foreach($products as $product): 
-                                if ($product->category_id == 1): ?>
+                                if ($product->category_id == $_GET['id']): ?>
                                     <div class="cartegory-right-content-item" onclick="product_detail(<?=html_escape($product->getId())?>)">
                                         <div class="images">
                                             <img src="../<?=html_escape($product->thumb1)?>" alt="">

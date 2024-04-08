@@ -1,15 +1,12 @@
 <?php
 require_once __DIR__ . '/../../utils/bootstrap.php';
-use CT275\Project\User;
-
-$user = new User($PDO);
-
+include_once __DIR__ . '/../partials/header.php';
 $id = isset($_REQUEST['id']) ? filter_var($_REQUEST['id'], FILTER_SANITIZE_NUMBER_INT) : -1;
 
 if ($id < 0 || !($user->find($id))) {
     redirect('/app/admin/user/users.php');
 }
-
+$user = $user->find($id);
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user->update($_POST)) {
@@ -17,8 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $errors = $user->getValidationErrors();
 }
-
-include_once __DIR__ . '/../partials/header.php';
 ?>
 <style>
        .back-product-list a:nth-child(3){
@@ -47,12 +42,12 @@ include_once __DIR__ . '/../partials/header.php';
                                 <label for="role_id">Vai Trò</label>
                                 <br>
                                 <select name="role_id" id="role_id" class="form-control">
-                                    <option value="" style="display: none;">
-                                    <?php if ($user->gender == 0) :?>
-                                    <td class="align-middle">Quẩn trị viên</td>
-                                    <?php else :?>
-                                        <td class="align-middle">Người dùng</td>
-                                    <?php endif ?></option>
+                                    <option value=<?= html_escape($user->role_id)?> style="display: none;"><?php if (html_escape($user->role_id) == 0) {
+                                        echo "Quản Trị Viên";
+                                    }
+                                    else {
+                                        echo "Người dùng";
+                                    }?></option>
                                     <option value=0>Quản trị viên</option>
                                     <option value=1>Người dùng</option>
                                 </select>

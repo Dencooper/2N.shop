@@ -48,6 +48,18 @@ class User
         return $this;
     }
 
+    public function fillUpdated(array $data): user
+    {
+        $this->fullname = $data['fullname'] ?? '';
+        $this->email = $data['email'] ?? '';
+        $this->phone_number = $data['phone_number'] ?? '';
+        $this->address = $data['address'] ?? '';
+        $this->dob = $data['dob'] ?? '';
+        $this->gender = $data['gender'] ?? '';
+        $this->role_id = $data['role_id'] ?? '';
+        return $this;
+    }
+
 
     public function getValidationErrors(): array
     {
@@ -199,7 +211,7 @@ class User
     }
     public function update(array $data): bool
     {
-        $this->fill($data);
+        $this->fillUpdated($data);
         if ($this->validate()) {
             return $this->save();
         }

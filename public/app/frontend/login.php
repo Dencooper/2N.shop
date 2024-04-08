@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="left-login">
                     <h3>Bạn đã có tài khoản 2N Shop</h3>
                     <p>Nếu bạn đã có tài khoản, hãy đăng nhập để tích lũy điểm thành viên và nhận được ưu đãi tốt hơn</p>
-                    <form method="post">
+                    <form method="post" id="loginForm" >
                         <input type="text" class="form-control" placeholder="Email của bạn" name="email">
                         <input type="password" class="form-control" placeholder="Mật khẩu" name="password">
                         <div class="checked-me">
@@ -67,42 +67,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
  <script type="text/javascript">
-//        $.validator.setDefaults({
-//        submitHandler: function() { alert("submitted!"); }
-//        });
-
         $(document).ready(function () {
-            $("#signupForm").validate({
+            $("#loginForm").validate({
                 rules: {
-                    fullname: "required",
-                    username: {required: true, minlength: 2 },
-                    password: {required: true, minlength: 5 },
-                    confirm_password: {
+                    email: {
                         required: true,
-                        minlength: 5,
-                        equalTo: "#password"
-                    }    
+                        email: true
+                    },
+                    password: {required: true, minlength: 5 },
                 },
                 messages: {
-                    fullname: "Bạn chưa nhập họ và tên của bạn",
                     email: {
-                    required: true,
-                    email: true
-                    },
-                    username: {
-                        required: "Bạn chưa nhập vào tên đăng nhập",
-                        minlength: "Tên đăng nhập phải có ít nhất 2 ký tự"
+                        required: "Bạn chưa nhập vào email",
+                        email: "Email không hợp lệ"
                     },
                     password: {
                         required: "Bạn chưa nhập mật khẩu",
                         minlength: "Mật khẩu phải có ít nhất 5 ký tự" 
                     },
-                    confirm_password: {
-                        required: "Bạn chưa nhập mật khẩu",
-                        minlength: "Mật khẩu phải có ít nhất 5 ký tự",
-                        equalTo: "Mật khẩu không trùng khớp với mật khẩu trên"
-                    },
-                    address: "Bạn chưa nhập địa chỉ"
                 },
                 errorElement: "div",
                 errorPlacement: function (error, element) {

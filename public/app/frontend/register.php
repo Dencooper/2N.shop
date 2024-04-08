@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="checked-me mb-1">
                         <input type="checkbox" id="agree" name="agree" class="me-2" required>
-                        <label for="agree">Đồng ý với các <a href="" style="color: rgb(237, 97, 97); font-size: 14px;">điều khoản</a> của IVY</label>
+                        <label for="agree">Đồng ý với các <a href="" style="color: rgb(237, 97, 97); font-size: 14px;">điều khoản</a> của 2N Shop</label>
                     </div>
                     <div class="checked-me mb-3">
                         <input type="checkbox" id="regis" name="regis" class="me-2">
@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     },
                     phone_number: {
                         required: true,
-                        tel: true
+                        minlength: 9,
                     },
                     password: {required: true, minlength: 6 },
                     confirm_password: {
@@ -174,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     },
                     phone_number: {
                         required: "Bạn chưa nhập số điện thoại",
-                        email: "Số điện thoại khồng hợp lệ"
+                        minlength: "Số điện thoại không hợp lệ",
                     },
                     password: {
                         required: "Bạn chưa nhập mật khẩu",

@@ -62,7 +62,7 @@ $count = 0;
             <div class="others">
                 <?php if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && $_COOKIE['session_cookie'] == session_id()):?>
                     <li><a href=""><?= $user->fullname?></a></li>
-                    <li><a href="faq.php"><i class="fa-solid fa-headphones"></i></a></li>
+                    <li><a href="app/frontend/faq.php"><i class="fa-solid fa-headphones"></i></a></li>
                     <li><a href="app/frontend/logout.php" data-bs-toggle="tooltip" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></i></a></li>
                 <?php else: ?>
                     <li><a href="app/frontend/faq.php"><i class="fa-solid fa-headphones"></i></a></li>

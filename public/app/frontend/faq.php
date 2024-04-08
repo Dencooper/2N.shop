@@ -3,8 +3,10 @@ require_once __DIR__ . '/../utils/bootstrap.php';
 include_once __DIR__ . '/partials/header.php';
 
 use CT275\Project\User;
-
 $user = new User($PDO);
+if(isset($_SESSION['email']) && isset($_COOKIE['session_cookie']) && ($_COOKIE['session_cookie'] == session_id())){
+    $user = $user->findEmail($_SESSION['email']);
+}
 ?>
 <title> FAQ | 2N Shop</title>
 

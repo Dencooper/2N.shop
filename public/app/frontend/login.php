@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         required: true,
                         email: true
                     },
-                    password: {required: true, minlength: 5 },
+                    password: {required: true, minlength: 5 }
                 },
                 messages: {
                     email: {
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     password: {
                         required: "Bạn chưa nhập mật khẩu",
                         minlength: "Mật khẩu phải có ít nhất 5 ký tự" 
-                    },
+                    }
                 },
                 errorElement: "div",
                 errorPlacement: function (error, element) {

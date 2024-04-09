@@ -21,6 +21,7 @@ include_once __DIR__ . '/../partials/header.php';
             opacity: 0.5;
         }
     </style>
+    <title>Tìm Kiếm Danh Mục | 2N Shop</title>
 </head>
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
@@ -68,13 +69,13 @@ include_once __DIR__ . '/../partials/header.php';
                                     <td class="align-middle"><?=html_escape($result['name'])?></td>
                                     <td class="align-middle"><?= html_escape($countProduct);?></td>
                                     <td class="align-middle"><?=html_escape(date("d-m-Y", strtotime($result['created_at'])))?></td>
-                                    <td class="align-middle" style="border-bottom: none">
+                                    <td class="d-flex justify-content-center" style="border-bottom: none">
                                         <a href="<?= 'edit.php?id=' . $result['id'] ?>" class="btn btn-xs btn-warning">
                                             <i alt="Edit" class="fa fa-pencil"></i> Edit
                                         </a>
-                                        <form class="form mt-3" action="delete.php" method="POST">
-                                            <input type="hidden" name="id" value="<?= $result['id'] ?>"/>
-                                            <button type="submit" class="btn btn-xs btn-danger"           name="delete-category">
+                                        <form class="form ml-1" action="delete.php" method="POST">
+                                            <input type="hidden" name="id" value=<?= $result['id'] ?> />
+                                            <button type="submit" class="btn btn-xs btn-danger"             name="delete-category">
                                                 <i alt="Delete" class="fa fa-trash"></i> Delete
                                             </button>
                                         </form>
@@ -107,6 +108,8 @@ include_once __DIR__ . '/../partials/header.php';
     </div>
 
     <?php include_once __DIR__ . '/../partials/footer.php' ?>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
             $('button[name="delete-category"]').on('click', function(e){

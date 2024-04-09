@@ -1402,8 +1402,7 @@ thead{
     padding: 15px;
 }
 .checked-me input {
-    margin-top: 30px;
-    width: unset;
+    margin-top: 5px;
     width: 18px;
     height: 18px;
 }

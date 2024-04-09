@@ -11,14 +11,17 @@ $products = $product->all();
 $categories = $category->all();
 
 include_once __DIR__ . '/../partials/header.php';
+
 ?>
-<style>
+   
+    <style>
         .back-product-list a:nth-child(1){
             opacity: 0.5;
             pointer-events: none;
             cursor: default;
         }
     </style>
+    <title>Quản Lí Sản Phẩm | 2N Shop</title>
 </head>
 <body>
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>

@@ -12,11 +12,12 @@ $statement->execute([$title]);
 
 include_once __DIR__ . '/../partials/header.php';
 ?>
-<style>
+    <style>
         .back-product-list a:nth-child(1){
             opacity: 0.5;
         }
     </style>
+    <title>Tìm Kiếm Sản Phẩm | 2N Shop</title>
 </head>
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
@@ -50,6 +51,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <thead class="text-center">
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">Danh Mục</th>
                             <th scope="col">Tên Sản Phẩm</th>
                             <th scope="col">Giá Niêm Yết</th>
                             <th scope="col">Giảm Giá</th>
@@ -63,6 +65,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <?php while($result = $statement->fetch()): ?>
                                 <tr class="text-center">
                                     <td class="align-middle"><?=html_escape($result['id'])?></td>
+                                    <td class="align-middle"><?=html_escape($result['category_id'])?></td>
                                     <td class="align-middle"><?=html_escape($result['title'])?></td>
                                     <td class="align-middle formatted-number"><?= html_escape($result['price']);?></td>
                                     <td class="align-middle"><?=html_escape($result['discount']) . "%" ?></td>
@@ -70,12 +73,12 @@ include_once __DIR__ . '/../partials/header.php';
                                     <td class="align-middle"><img src="../../<?=html_escape($result['thumb1'])?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
                                     <td class="align-middle"><img src="../../<?=html_escape($result['thumb2'])?>" alt="" style="max-width: 150px; max-height: 150px;"></td>
                                     <td class="align-middle" style="border-bottom: none">
-                                        <a href="<?= '/edit.php?id=' . $result['id'] ?>" class="btn btn-xs btn-warning">
+                                        <a href="<?= 'edit.php?id=' . $result['id'] ?>" class="btn btn-xs btn-warning">
                                             <i alt="Edit" class="fa fa-pencil"></i> Sửa
                                         </a>
-                                        <form class="form mt-3" action="/delete.php" method="POST">
+                                        <form class="form mt-3" action="delete.php" method="POST">
                                             <input type="hidden" name="id" value="<?= $result['id'] ?>"/>
-                                            <button type="submit" class="btn btn-xs btn-danger"             name="delete-product">
+                                            <button type="submit" class="btn btn-xs btn-danger" name="delete-product">
                                                 <i alt="Delete" class="fa fa-trash"></i> Xóa
                                             </button>
                                         </form>
@@ -108,13 +111,15 @@ include_once __DIR__ . '/../partials/header.php';
     </div>
 
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
             $('button[name="delete-product"]').on('click', function(e){
                 e.preventDefault();
                 
                 const form = $(this).closest('form');
-                const nameTd = $(this).closest('tr').find('td:first');
+                const nameTd = $(this).closest('tr').find('td').eq(2);
                 if (nameTd.length > 0) {
                     $('.modal-body').html(`Bạn muốn xóa sản phẩm "${nameTd.text()}"?`);
                 }

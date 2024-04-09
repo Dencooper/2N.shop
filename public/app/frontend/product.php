@@ -7,7 +7,7 @@ use CT275\Project\Product;
 $product = new Product($PDO);
 $detailProduct = $product->find($_GET['id']);
 ?>
-    <title>Chi tiết sản phẩm</title>
+    <title>Chi tiết sản phẩm | 2N Shop</title>
 <?php
 include_once __DIR__ . '/partials/navbar.php';
 ?>

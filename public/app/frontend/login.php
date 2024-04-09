@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <form method="post" id="loginForm" >
                         <input type="text" class="form-control" placeholder="Email của bạn" name="email">
                         <input type="password" class="form-control" placeholder="Mật khẩu" name="password">
-                        <div class="checked-me">
+                        <div class="checked-me mt-3">
                             <input type="checkbox" id="checked">
                             <label for="">Ghi nhớ đăng nhập</label>
                         </div>

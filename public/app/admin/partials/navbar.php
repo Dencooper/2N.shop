@@ -19,8 +19,8 @@
 
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <ul class="navbar-nav ml-auto">
-            <li><a href=""><?= $user->fullname?></a></li>
-            <li><a href="../../frontend/logout.php" data-bs-toggle="tooltip" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></i></a></li>
+            <li><span style="font-size:16px; font-weight:600;" ><?= $user->fullname?></span></li>
+            <li><a href="../../frontend/logout.php" data-bs-toggle="tooltip" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 </nav>

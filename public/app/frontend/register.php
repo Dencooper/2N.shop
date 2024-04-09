@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Nhập lại mật khẩu.." style="width: 100%;">
                         </div>
                     </div>
-                    <div class="checked-me mb-1">
+                    <div class="checked-me mb-1 mt-4">
                         <input type="checkbox" id="username" name="email_username" class="me-2" required>
                         <label for="regis">Email là tên tài khoản</label>
                     </div>

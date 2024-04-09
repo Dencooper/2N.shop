@@ -19,11 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 include_once __DIR__ . '/../partials/header.php';
 ?>
-<style>
+    <style>
         .back-product-list a:nth-child(1){
             opacity: 0.5;
         }
     </style>
+    <title>Thêm Sản Phẩm | 2N Shop</title>
+
 </head>
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>

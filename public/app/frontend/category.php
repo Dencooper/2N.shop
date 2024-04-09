@@ -9,8 +9,12 @@ if (!isset($_GET['id'])) {
     exit();
 }
 ?>
-    <title>Danh Mục - Nữ | 2N Shop</title>
-<?php
+    <title>Danh Mục - <?php if ($_GET['id'] == 1) {    
+                            echo "Nữ";}
+                        elseif ($_GET['id'] == 6) {
+                            echo "Nam";}
+                        else echo "Trẻ em";?>
+    | 2N Shop</title><?php
 include_once __DIR__ . '/partials/navbar.php';
 ?>
     <main class="site-main">

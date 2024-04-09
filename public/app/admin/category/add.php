@@ -20,6 +20,7 @@ include_once __DIR__ . '/../partials/header.php';
             opacity: 0.5;
         }
     </style>
+    <title>Thêm Danh Mục | 2N Shop</title>
 </head>
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>

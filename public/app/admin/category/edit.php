@@ -25,6 +25,8 @@ include_once __DIR__ . '/../partials/header.php';
             opacity: 0.5;
         }
     </style>
+    <title>Cập Nhật Danh Mục | 2N Shop</title>
+
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 

@@ -15,6 +15,7 @@ include_once __DIR__ . '/../partials/header.php';
             cursor: default;
         }
     </style>
+    <title>Quản Lí Danh Mục | 2N Shop</title>
 </head>
 <body>
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>

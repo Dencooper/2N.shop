@@ -105,8 +105,7 @@ include_once __DIR__ . '/../partials/header.php';
                             <!-- dob -->
                             <div class="form-group">
                                 <label for="dob">Ngày sinh</label>
-                                <input type="date" name="dob" class="form-control<?= isset($errors['dob']) ? ' is-invalid' : '' ?>" id="dob" value="<?= isset($_POST['dob']) ? html_escape($_POST['dob']) : '' ?>" />
-
+                                <input type="date" name="dob" class="form-control<?= isset($errors['dob']) ? ' is-invalid' : '' ?>" id="dob" value="<?= isset($_POST['dob']) ? html_escape($_POST['dob']) : '' ?>" max="2008-01-01" />
                                 <?php if (isset($errors['dob'])) : ?>
                                     <span class="invalid-feedback">
                                         <strong><?= $errors['dob'] ?></strong>

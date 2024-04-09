@@ -23,7 +23,7 @@ include_once __DIR__ . '/../partials/header.php';
     <div class="container pb-3 mb-3">
         <h2 class="text-center animate__animated animate__bounce">Quản Lí Tài Khoản</h2>
         <?php
-            $subtitle = 'Thông tin tất cả tài khoản';
+            $subtitle = "Kết quả tìm kiếm của từ khóa \"" .  $_GET['email'] . "\"";
             include_once __DIR__ . '/../partials/heading.php';
         ?>
         <div class="row">

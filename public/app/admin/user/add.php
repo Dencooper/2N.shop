@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user->fill($_POST);
             if ($user->validate()) {
                 $user->save();
-                header('Location: login.php');
+                header('Location: users.php');
                 exit();
             }
             $errors = $user->getValidationErrors();

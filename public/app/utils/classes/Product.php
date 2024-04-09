@@ -65,7 +65,28 @@ class Product
     {
         $title = trim($this->title);
         if (!$title) {
-            $this->errors['title'] = 'Invalid title.';
+            $this->errors['title'] = 'Tên không hợp lệ!';
+        }
+
+        $price = ($this->price > 0);
+        if (!$price) {
+            $this->errors['price'] = 'Giá niêm yết không hợp lệ!';
+        }
+        $discount = ($this->discount <= 100 && $this->discount >= 0);
+        if (!$discount) {
+            $this->errors['discount'] = 'Mức giảm giá không hợp lệ!';
+        }
+        $thumb1 = ($this->thumb1 !== 'images/');
+        if (!$thumb1) {
+            $this->errors['thumb1'] = 'Hình ảnh 1 không hợp lệ';
+        }
+        $thumb2 =  ($this->thumb2 !== 'images/');
+        if (!$thumb2) {
+            $this->errors['thumb2'] = 'Hình ảnh 2 không hợp lệ!';
+        }
+        $category_id = ($this->category_id <= 100 && $this->category_id > 0);
+        if (!$category_id) {
+            $this->errors['category_id'] = 'Danh mục không hợp lệ!';
         }
 
         return empty($this->errors);

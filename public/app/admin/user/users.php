@@ -8,13 +8,14 @@ $users = $user->all();
 
 include_once __DIR__ . '/../partials/header.php';
 ?>
-<style>
+    <style>
         .back-product-list a:nth-child(3){
             opacity: 0.5;
             pointer-events: none;
             cursor: default;
         }
     </style>
+    <title>Quản Lí Tài Khoản | 2N Shop</title>
 </head>
 <body>
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>

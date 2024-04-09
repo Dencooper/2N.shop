@@ -43,7 +43,7 @@ class Category
     {
         $name = trim($this->name);
         if (!$name) {
-            $this->errors['name'] = 'Invalid name.';
+            $this->errors['name'] = 'Tên danh mục không hợp lệ!';
         }
 
         return empty($this->errors);

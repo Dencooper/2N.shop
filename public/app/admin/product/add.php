@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($product->validate()) {
         $product->save() && redirect('/app/admin/product/products.php');
     }
-
     $errors = $product->getValidationErrors();
 }
 include_once __DIR__ . '/../partials/header.php';
@@ -46,17 +45,23 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="form-group">
                         <label for="category_id">Chọn Danh Mục Sản Phẩm</label>
                         <br>
-                        <select name="category_id" class="form-control">
-                            <option style="display: none;">-- Tên Danh Mục --</option>
+                        <select name="category_id" class="form-control<?= isset($errors['title']) ? ' is-invalid' : '' ?>">
+                            <option style="display: none;" value="0">-- Tên Danh Mục --</option>
                             <?php foreach($categories as $category):?>
                                 <option value=<?=$category->getId()?>><?=html_escape($category->name)?></option>
                             <?php endforeach ?>
                         </select>
+
+                        <?php if (isset($errors['category_id'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['category_id'] ?></strong>
+                            </span>
+                        <?php endif ?>
                     </div>
                     <!-- title -->
                     <div class="form-group">
                         <label for="title">Tên Sản Phẩm</label>
-                        <input type="text" name="title" class="form-control" maxlen="255" id="title" placeholder="Nhập tên sản phẩm"  />
+                        <input type="text" name="title" class="form-control<?= isset($errors['title']) ? ' is-invalid' : '' ?>" maxlen="255" id="title" placeholder="Nhập tên sản phẩm"  />
 
                         <?php if (isset($errors['title'])) : ?>
                             <span class="invalid-feedback">
@@ -68,28 +73,39 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- Price -->
                     <div class="form-group">
                         <label for="price">Giá Niêm Yết</label>
-                        <input type="number" name="price" class="form-control" id="price" placeholder="Nhập giá niêm yết"/>
-
+                        <input type="number" name="price" class="form-control<?= isset($errors['price']) ? ' is-invalid' : '' ?>" id="price" placeholder="Nhập giá niêm yết"/>
+                        <?php if (isset($errors['price'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['price'] ?></strong>
+                            </span>
+                        <?php endif ?>
                     </div>
                     <!-- Discount -->
                     <div class="form-group">
                         <label for="discount">Mức giảm giá (%)</label>
-                        <input type="number" name="discount" class="form-control" id="discount" placeholder="Nhập mức giảm giá" value="<?= isset($_POST['discount']) ? html_escape($_POST['discount']) : '' ?>" />
-
+                        <input type="number" name="discount" class="form-control<?= isset($errors['discount']) ? ' is-invalid' : '' ?>" id="discount" placeholder="Nhập mức giảm giá" value="<?= isset($_POST['discount']) ? html_escape($_POST['discount']) : '' ?>" />
+                        <?php if (isset($errors['discount'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['discount'] ?></strong>
+                            </span>
+                        <?php endif ?>
                     </div>
 
                     <!-- Thumb1 -->
                     <div class="form-group" style="margin-top:30px">
                         <p style="font-size:14px;">Hình Ảnh 1 của Sản Phẩm</p>
-                        <input type="file" name="thumb1" id="thumb1" ><?= isset($_POST['thumb1']) ? html_escape($_POST['thumb1']) : '' ?></input>
-
+                        <input type="file" name="thumb1" id="thumb1" class="<?= isset($errors['thumb1']) ? ' is-invalid' : '' ?>"/>
+                        <?php if (isset($errors['thumb1'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['thumb1'] ?></strong>
+                            </span>
+                        <?php endif ?>
                         <img class="preview-image" id="preview-image1" src="#" alt="Preview Image" style="display: none; max-width: 250px; max-height: 250px;">
                     </div>
                     <!-- Thumb2 -->
                     <div class="form-group" style="margin-top:40px">
                         <p style="font-size:14px;">Hình Ảnh 2 của Sản Phẩm</p>
-                        <input type="file" name="thumb2" id="thumb2" class="<?= isset($errors['thumb2']) ? ' is-invalid' : '' ?>"><?= isset($_POST['thumb2']) ? html_escape($_POST['thumb2']) : '' ?></input>
-
+                        <input type="file" name="thumb2" id="thumb2" class="<?= isset($errors['thumb2']) ? ' is-invalid' : '' ?>" />
                         <?php if (isset($errors['thumb2'])) : ?>
                             <span class="invalid-feedback">
                                 <strong><?= $errors['thumb2'] ?></strong>

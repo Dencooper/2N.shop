@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             opacity: 0.5;
         }
     </style>
+    <title>Cập Nhật Tài Khoản | 2N Shop</title>
 </head>
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
@@ -142,9 +143,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
         </div>
-
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#addUser").validate({
+                rules: {
+                    role_id: {
+                        required: true, 
+                    },
+                    fullname: {
+                        required: true, 
+                        minlength: 4 
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone_number: {
+                        required: true,
+                        minlength: 9,
+                    },
+                    dob: {
+                        required: true,
+                    },
+                    gender: {
+                        required: true,
+                    },
+                    address: {
+                        required: true,
+                    },
+                    password: {required: true, minlength: 6 },
+                    confirm_password: {
+                        required: true,
+                        minlength: 6,
+                        equalTo: "#password"
+                    }    
+                },
+                messages: {
+                    fullname: {
+                        required: "Bạn chưa nhập họ và tên",
+                        minlength: "Bạn chưa nhập đủ họ tên"
+                    },
+                    email: {
+                        required: "Bạn chưa nhập vào email",
+                        email: "Email không hợp lệ "
+                    },
+                    phone_number: {
+                        required: "Bạn chưa nhập số điện thoại",
+                        minlength: "Số điện thoại không hợp lệ",
+                    },
+                    password: {
+                        required: "Bạn chưa nhập mật khẩu",
+                        minlength: "Mật khẩu phải có ít nhất 5 ký tự" 
+                    },
+                    confirm_password: {
+                        required: "Bạn chưa nhập mật khẩu",
+                        minlength: "Mật khẩu phải có ít nhất 5 ký tự",
+                        equalTo: "Mật khẩu không trùng khớp với mật khẩu trên"
+                    },
+                    address: "Bạn chưa nhập địa chỉ",
+                    role_id: "Bạn chưa chọn vai trò",
+                    dob: "Bạn chưa chọn ngày sinh",
+                    gender: "Bạn chưa chọn giới tính"
+                },
+                errorElement: "div",
+                errorPlacement: function (error, element) {
+                    error.addClass("invalid-feedback");
+                    if(element.prop("type") === "checkbox") {
+                        error.insertAfter(element.siblings("label"));
+                    }else{
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+        });
+    </script>
     <?php include_once __DIR__ . '/../partials/footer.php' ?>
-                                                                                                        
+                                                                                        
 </body>
 </html>

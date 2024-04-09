@@ -17,8 +17,8 @@ if ($id < 0 || !($product->find($id))) {
 
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($product->update($_POST, $_FILES)) {
-        redirect('/app/admin/product/products.php');
+    if ($product->validate()) {
+        $product->update($_POST, $_FILES) && redirect('/app/admin/product/products.php');
     }
     $errors = $product->getValidationErrors();
 }
@@ -78,7 +78,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- Price -->
                     <div class="form-group">
                         <label for="price">Giá Niêm Yết</label>
-                        <input type="number" name="price" class="form-control<?= isset($errors['price']) ? ' is-invalid' : '' ?>" id="price" placeholder="Nhập giá niêm yết" value="<?= html_escape($product->price) ?>" />
+                        <input type="number" name="price" class="formatted-number form-control<?= isset($errors['price']) ? ' is-invalid' : '' ?>" id="price" placeholder="Nhập giá niêm yết" value="<?= html_escape($product->price) ?>" />
 
                         <?php if (isset($errors['price'])) : ?>
                             <span class="invalid-feedback">
@@ -134,7 +134,6 @@ include_once __DIR__ . '/../partials/header.php';
 
     <?php include_once __DIR__ . '/../partials/footer.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-
     <script>
         $(document).ready(function() {
             function isImage(file) {

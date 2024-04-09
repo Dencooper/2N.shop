@@ -68,11 +68,41 @@ class User
 
     public function validate(): bool
     {
+        $role_id = ($this->role_id > 0);
+        if (!$role_id) {
+            $this->errors['role_id'] = 'Vai trò không hợp lệ.';
+        }
         $fullname = trim($this->fullname);
         if (!$fullname) {
-            $this->errors['fullname'] = 'Invalid fullname.';
+            $this->errors['fullname'] = 'Họ và tên không hợp lệ.';
         }
-
+        $email = trim($this->email);
+        if (!$email) {
+            $this->errors['email'] = 'Email không hợp lệ.';
+        }
+        $validPhone = preg_match(
+            '/^(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b$/',
+            $this->phone_number
+        );
+        if (!$validPhone) {
+            $this->errors['phone_number'] = 'Số điện thoại không hợp lệ.';
+        }
+        $address = trim($this->address);
+        if (!$address) {
+            $this->errors['address'] = 'Địa chỉ không hợp lệ.';
+        }
+        $dob = trim($this->dob);
+        if (!$dob) {
+            $this->errors['dob'] = 'Ngày sinh không hợp lệ.';
+        }
+        $gender = ($this->gender == 1 || $this->gender == 2 && $this->gender == 3);
+        if (!$gender) {
+            $this->errors['gender'] = 'Giới tính không hợp lệ.';
+        }
+        $password = ($this->password == md5(" "));
+        if (!$password) {
+            $this->errors['password'] = 'Họ và tên không hợp lệ.';
+        }
         return empty($this->errors);
     }
 

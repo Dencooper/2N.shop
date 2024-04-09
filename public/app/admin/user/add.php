@@ -4,32 +4,23 @@ use CT275\Project\User;
 
 $user = new User($PDO);
 $errors = [];
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST['fullname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-        if (!($user->checkRegister($_POST['email']))) {
-            echo "<script>alert(\"Email đã được sử dụng!\");</script>";
-        } else {
-            $user = new User($PDO);
-            $user->fill($_POST);
-            if ($user->validate()) {
-                $user->save();
-                header('Location: users.php');
-                exit();
-            }
-            $errors = $user->getValidationErrors();
-            
-        }
-    } else {
-        echo "Vui lòng điền đầy đủ thông tin cần thiết!";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user = new User($PDO);
+    $user->fill($_POST);
+    if ($user->validate()) {
+        $user->save() && redirect('/app/admin/user/users.php');
     }
+    $errors = $user->getValidationErrors();
 }
 include_once __DIR__ . '/../partials/header.php';
 ?>
-<style>
+    <style>
         .back-product-list a:nth-child(3){
             opacity: 0.5;
         }
     </style>
+    <title>Thêm Tài Khoản | 2N Shop</title>
+
 </head>
 <body>
 <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
@@ -51,11 +42,16 @@ include_once __DIR__ . '/../partials/header.php';
                             <div class="form-group">
                                 <label for="role_id">Vai Trò</label>
                                 <br>
-                                <select name="role_id" id="role_id" class="form-control">
+                                <select name="role_id" id="role_id" class="form-control<?= isset($errors['role_id']) ? ' is-invalid' : '' ?>">
                                     <option value="" style="display: none;">-- Vai trò --</option>
                                     <option value=0>Quản Trị Viên</option>
                                     <option value=1>Người Dùng</option>
                                 </select>
+                                <?php if (isset($errors['role_id'])) : ?>
+                                    <span class="invalid-feedback">
+                                        <strong><?= $errors['role_id'] ?></strong>
+                                    </span>
+                                <?php endif ?>
                             </div>
                         </div>
                         <div class="col-6">
@@ -118,12 +114,17 @@ include_once __DIR__ . '/../partials/header.php';
                             <div class="form-group">
                                 <label for="gender">Giới tính</label>
                                 <br>
-                                <select name="gender" id="gender" class="form-control">
+                                <select name="gender" id="gender" class="form-control<?= isset($errors['gender']) ? ' is-invalid' : '' ?>">
                                     <option value="" style="display: none;">-- Giới tính --</option>
                                     <option value=1>Nữ</option>
                                     <option value=2>Nam</option>
                                     <option value=3>Khác</option>
                                 </select>
+                                <?php if (isset($errors['gender'])) : ?>
+                                    <span class="invalid-feedback">
+                                        <strong><?= $errors['gender'] ?></strong>
+                                    </span>
+                                <?php endif ?>
                             </div>
                         </div>
                     </div>
@@ -145,7 +146,7 @@ include_once __DIR__ . '/../partials/header.php';
                             <!-- password -->
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input type="password" name="password" class="form-control<?= isset($errors['password']) ? ' is-invalid' : '' ?>" id="password" placeholder="Nhập password.." value="<?= isset($_POST['password']) ? html_escape($_POST['password']) : '' ?>" />
+                                <input type="password" name="password" class="form-control<?= isset($errors['password']) ? ' is-invalid' : '' ?>" id="password" placeholder="Nhập password.."/>
 
                                 <?php if (isset($errors['password'])) : ?>
                                     <span class="invalid-feedback">

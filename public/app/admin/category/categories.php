@@ -55,6 +55,7 @@ include_once __DIR__ . '/../partials/header.php';
                             <th scope="col">Hành Động</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <?php foreach($categories as $category):?>
                              

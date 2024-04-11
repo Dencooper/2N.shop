@@ -68,7 +68,7 @@ class User
 
     public function validate(): bool
     {
-        $role_id = ($this->role_id > 0);
+        $role_id = ($this->role_id >= 0);
         if (!$role_id) {
             $this->errors['role_id'] = 'Vai trò không hợp lệ.';
         }
@@ -81,7 +81,7 @@ class User
             $this->errors['email'] = 'Email không hợp lệ.';
         }
         $validPhone = preg_match(
-            '/^(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b$/',
+            '/([0-9]{9})$/',
             $this->phone_number
         );
         if (!$validPhone) {
@@ -95,15 +95,16 @@ class User
         if (!$dob) {
             $this->errors['dob'] = 'Ngày sinh không hợp lệ.';
         }
-        $gender = ($this->gender == 1 || $this->gender == 2 && $this->gender == 3);
+        $gender = ($this->gender == 1 || $this->gender == 2 || $this->gender == 3);
         if (!$gender) {
             $this->errors['gender'] = 'Giới tính không hợp lệ.';
         }
-        $password = ($this->password == md5(" "));
+        $password = ($this->password !== md5(" "));
         if (!$password) {
             $this->errors['password'] = 'Họ và tên không hợp lệ.';
         }
         return empty($this->errors);
+
     }
 
     public function all(): array

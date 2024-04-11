@@ -5,6 +5,10 @@ include_once __DIR__ . '/partials/header.php';
 use CT275\Project\User;
 
 $user = new User($PDO);
+if(isset($_SESSION['regisSuc'])) {
+    echo "<script>alert('".$_SESSION['regisSuc']."');</script>";
+    unset($_SESSION['regisSuc']);
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['email']) && !empty($_POST['password'])){
         $email = $_POST['email'];
@@ -25,7 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else {
             echo "<script>alert(\"Email hoặc password không tồn tại!\");</script>";
         }
-        
+    }
+    else {
+        echo "<script>alert(\"Bạn chưa nhập email hoặc mật khẩu!\");</script>";
     }
 }
 
@@ -64,44 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
- <script type="text/javascript">
-        $(document).ready(function () {
-            $("#loginForm").validate({
-                rules: {
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {required: true, minlength: 5 }
-                },
-                messages: {
-                    email: {
-                        required: "Bạn chưa nhập vào email",
-                        email: "Email không hợp lệ"
-                    },
-                    password: {
-                        required: "Bạn chưa nhập mật khẩu",
-                        minlength: "Mật khẩu phải có ít nhất 5 ký tự" 
-                    }
-                },
-                errorElement: "div",
-                errorPlacement: function (error, element) {
-                    error.addClass("invalid-feedback");
-                    if(element.prop("type") === "checkbox") {
-                        error.insertAfter(element.siblings("label"));
-                    }else{
-                        error.insertAfter(element);
-                    }
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass("is-invalid").removeClass("is-valid");
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).addClass("is-valid").removeClass("is-invalid");
-                }
-            });
-        });
-    </script> 
+    
+
     <?php include_once __DIR__ . '/partials/footer.php' ?>

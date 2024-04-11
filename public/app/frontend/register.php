@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user->fill($_POST);
             if ($user->validate()) {
                 $user->save();
-                echo "<script>alert(\"Bạn đã đăng kí tài khoản thành công\");</script>";
+                $_SESSION['regisSuc'] = "Bạn đã đăng kí tài khoản thành công!";
                 header('Location: login.php');
                 exit();
             }
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Ngày sinh:<span style="color: red;">*</span></label>
-                                <input type="date" id="dob" name="dob" class="form-control" placeholder="Ngày sinh.." style="width: 100%;" required>
+                                <input type="date" id="dob" name="dob" class="form-control" placeholder="Ngày sinh.." style="width: 100%;" required max="2008-01-01">
                             </div>
                         </div>
                         <div class="col-md-6">

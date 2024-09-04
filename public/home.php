@@ -31,7 +31,7 @@ $count = 0;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="icon" href="app/images/logo.png" type="image/png" sizes="20x20">
-    <title>Trang Chủ | 2N Shop n2</title>
+    <title>Trang Chủ | 2N Shop</title>
 </head>
 
 <body>
@@ -151,7 +151,8 @@ $count = 0;
                                         <p style="height:45px;"><?= html_escape($product->title) ?></p>
                                         <p class="formatted-number">
                                             <strong><?= html_escape($product->price - ($product->discount * $product->price * 0.01)) ?>đ
-                                            </strong><del><?= html_escape($product->price) ?>đ</del></p>
+                                            </strong><del><?= html_escape($product->price) ?>đ</del>
+                                        </p>
                                         <div class="add-to-cart">
 
                                         </div>
@@ -172,7 +173,8 @@ $count = 0;
                                         <p><?= html_escape($product->title) ?></p>
                                         <p class="formatted-number">
                                             <strong><?= html_escape($product->price - ($product->discount * $product->price * 0.01)) ?>đ
-                                            </strong><del><?= html_escape($product->price) ?>đ</del></p>
+                                            </strong><del><?= html_escape($product->price) ?>đ</del>
+                                        </p>
                                         <div class="add-to-cart">
 
                                         </div>
@@ -193,7 +195,8 @@ $count = 0;
                                         <p><?= html_escape($product->title) ?></p>
                                         <p class="formatted-number">
                                             <strong><?= html_escape($product->price - ($product->discount * $product->price * 0.01)) ?>đ
-                                            </strong><del><?= html_escape($product->price) ?>đ</del></p>
+                                            </strong><del><?= html_escape($product->price) ?>đ</del>
+                                        </p>
                                         <div class="add-to-cart">
 
                                         </div>
